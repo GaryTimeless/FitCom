@@ -15,7 +15,73 @@
   </ion-list>
 </template>
 
-<!-- Alternaitve -->
+
+<!-- AAAAAAAAAAAA         Übergabe der Daten - Anzeige Kaputt -->
+<script lang="ts">
+
+  // Hiermit funktioniert der Code insofern man die ausgewählten Firmen an eine andere komponente (eltern) übergibt
+  // Aber die Komponente an siche spinnt. 
+  // Man wählt X1 und X2 und es steht in der Website X1, X1 da
+
+
+
+import { IonItem, IonList, IonSelect, IonSelectOption } from '@ionic/vue';
+import { Ref, defineComponent, ref } from 'vue';
+//TODO seltsam, das hier ein export default ist und so. Unten ist alter code, der nicht funktioniert. 
+export default defineComponent({
+  components: { IonItem, IonList, IonSelect, IonSelectOption },
+  props: {
+    firmen: {
+      type: Array,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      selectedValues: [] as string[], // Hier wird ein leeres Array für die ausgewählten Werte initialisiert
+    };
+  },
+  methods: {
+    handleChange(event: any) {
+      // Hier werden die ausgewählten Firmen in der Konsole ausgegeben
+      console.log('Ausgewählte Firmen:', event.detail.value);
+      this.selectedValues = event.detail.value;
+      this.$emit('SelectedFirmaChange', this.selectedValues);
+    },
+  },
+});
+</script>
+
+<!-- AAAAAAAAAAAA         Anzeige Oke, keine Übergabe--> 
+<!-- <script lang="ts">
+
+// Hier funktioniert NUR die Componente - aber die Daten werden nicht weiter gegeben
+
+
+import { IonItem, IonList, IonSelect, IonSelectOption } from '@ionic/vue';
+import { Ref, defineComponent, ref } from 'vue';
+//TODO seltsam, das hier ein export default ist und so. Oben ein Versuch, das zu umgehen. Klappt nicht. 
+export default defineComponent({
+  components: { IonItem, IonList, IonSelect, IonSelectOption },
+  props: {
+    firmen: {
+      type: Array,
+      required: true,
+    },
+  },
+  data() {
+    
+  },
+  methods: {
+      handleChange(event: any) {
+        console.log('Current value:', JSON.stringify(event.detail.value));
+      },
+    },
+});
+</script> -->
+
+
+<!-- AAAAAAAAAAAA         Alternaitve -->
 <!-- <script lang="ts">
 DAS IST DER VERSUCH ES AN DIE ANDEREN KOMPONENTEN ANZUPASSEN - Die haben nämlich kein export default defineComponent({
 
@@ -49,68 +115,4 @@ const handleChange = (event: any) => {
     }
 
 
-</script> -->
-
-<!-- Übergabe der Daten - Anzeige Kaputt -->
-<script lang="ts">
-
-  // Hiermit funktioniert der Code insofern man die ausgewählten Firmen an eine andere komponente (eltern) übergibt
-  // Aber die Komponente an siche spinnt. 
-  // Man wählt X1 und X2 und es steht in der Website X1, X1 da
-
-
-
-import { IonItem, IonList, IonSelect, IonSelectOption } from '@ionic/vue';
-import { Ref, defineComponent, ref } from 'vue';
-//TODO seltsam, das hier ein export default ist und so. Oben ein Versuch, das zu umgehen. Klappt nicht. 
-export default defineComponent({
-  components: { IonItem, IonList, IonSelect, IonSelectOption },
-  props: {
-    firmen: {
-      type: Array,
-      required: true,
-    },
-  },
-  data() {
-    return {
-      // selectedValues: [] as string[], // Hier wird ein leeres Array für die ausgewählten Werte initialisiert
-    };
-  },
-  methods: {
-    handleChange(event: any) {
-      // Hier werden die ausgewählten Firmen in der Konsole ausgegeben
-      console.log('Ausgewählte Firmen:', event.detail.value);
-      this.selectedValues = event.detail.value;
-      this.$emit('SelectedFirmaChange', this.selectedValues);
-    },
-  },
-});
-</script>
-
-<!-- Anzeige Oke, keine Übergabe -->
-<!-- <script lang="ts">
-
-// Hier funktioniert NUR die Componente - aber die Daten werden nicht weiter gegeben
-
-
-import { IonItem, IonList, IonSelect, IonSelectOption } from '@ionic/vue';
-import { Ref, defineComponent, ref } from 'vue';
-//TODO seltsam, das hier ein export default ist und so. Oben ein Versuch, das zu umgehen. Klappt nicht. 
-export default defineComponent({
-  components: { IonItem, IonList, IonSelect, IonSelectOption },
-  props: {
-    firmen: {
-      type: Array,
-      required: true,
-    },
-  },
-  data() {
-    
-  },
-  methods: {
-      handleChange(event: any) {
-        console.log('Current value:', JSON.stringify(event.detail.value));
-      },
-    },
-});
 </script> -->
