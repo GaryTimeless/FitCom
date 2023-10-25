@@ -4,7 +4,6 @@
       <ion-select
         aria-label="Firma"
         placeholder="Wähle Firmen aus"
-        :compareWith="compareWith"
         @ionChange="handleChange"
         :multiple="true"
       >
@@ -53,11 +52,11 @@ const handleChange = (event: any) => {
 </script> -->
 
 <!-- Übergabe der Daten - Anzeige Kaputt -->
-<!-- <script lang="ts">
+<script lang="ts">
 
-  Hiermit funktioniert der Code insofern man die ausgewählten Firmen an eine andere komponente (eltern) übergibt
-  Aber die Komponente an siche spinnt. 
-  Man wählt X1 und X2 und es steht in der Website X1, X1 da
+  // Hiermit funktioniert der Code insofern man die ausgewählten Firmen an eine andere komponente (eltern) übergibt
+  // Aber die Komponente an siche spinnt. 
+  // Man wählt X1 und X2 und es steht in der Website X1, X1 da
 
 
 
@@ -78,17 +77,6 @@ export default defineComponent({
     };
   },
   methods: {
-    compareWith(o1: any, o2: any) {
-      if (!o1 || !o2) {
-        return o1 === o2;
-      }
-
-      if (Array.isArray(o2)) {
-        return o2.some((o) => o.value === o1.value);
-      }
-
-      return o1.value === o2.value;
-    },
     handleChange(event: any) {
       // Hier werden die ausgewählten Firmen in der Konsole ausgegeben
       console.log('Ausgewählte Firmen:', event.detail.value);
@@ -97,10 +85,10 @@ export default defineComponent({
     },
   },
 });
-</script> -->
+</script>
 
 <!-- Anzeige Oke, keine Übergabe -->
-<script lang="ts">
+<!-- <script lang="ts">
 
 // Hier funktioniert NUR die Componente - aber die Daten werden nicht weiter gegeben
 
@@ -120,7 +108,9 @@ export default defineComponent({
     
   },
   methods: {
-    
-  },
+      handleChange(event: any) {
+        console.log('Current value:', JSON.stringify(event.detail.value));
+      },
+    },
 });
-</script>
+</script> -->
