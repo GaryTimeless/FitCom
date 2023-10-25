@@ -19,7 +19,7 @@
 <!-- <script lang="ts">
 import { IonItem, IonList, IonSelect, IonSelectOption } from "@ionic/vue";
 import { Ref, defineComponent, ref } from "vue";
-test
+
 defineProps({
   firmen: {
     type: Array,
