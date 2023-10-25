@@ -17,8 +17,6 @@
         </ion-toolbar>
       </ion-header>
 
-      
-      
       <div class="Container">
         <!-- List of all Filter-->
         <!-- TODO alle filter als einzelne Componenten schreiben.-->
@@ -29,13 +27,13 @@
               @update -->
             <FirmaFilter
               :firmen="firmenListe"
-              @SelectedFirmaChange ="handleSelectedFirmen"
-              
+              @SelectedFirmaChange="handleSelectedFirmen"
             />
-          
 
-            <ProduktkategorieFilter :productKategorie="productKategorieListe" 
-            @SelectedProduktKategorieChange="handleSelectedProduktKategorie"/>
+            <ProduktkategorieFilter
+              :productKategorie="productKategorieListe"
+              @SelectedProduktKategorieChange="handleSelectedProduktKategorie"
+            />
             <!-- Price range-->
             <ion-item>
               <ion-label
@@ -209,14 +207,15 @@ const refresh = (ev: CustomEvent) => {
   }, 3000);
 };
 
-
-
 const Test = (selectedFirma: string[]) => {
-      // Hier erhältst du die ausgewählten Firmen von der Kindkomponente
-      console.log('Ausgewählte Firmen in übergeordneter Komponente:', selectedFirma);
+  // Hier erhältst du die ausgewählten Firmen von der Kindkomponente
+  console.log(
+    "Ausgewählte Firmen in übergeordneter Komponente:",
+    selectedFirma
+  );
 
-      // Verarbeite die ausgewählten Firmen hier
-    };
+  // Verarbeite die ausgewählten Firmen hier
+};
 
 const sortProducts = (key: string) => {
   if (key === "Firma") {
@@ -279,26 +278,39 @@ const handleSelectedFirmen = (selectedFirma: string[]) => {
 type ProduktKategorie = { value: string; label: string };
 const selectedProduktKategorieFromChild = ref<ProduktKategorie[]>([]);
 
-const handleSelectedProduktKategorie = (SelectedProduktKategorieChange: string[]) => {
+const handleSelectedProduktKategorie = (
+  SelectedProduktKategorieChange: string[]
+) => {
   console.log("Selected ProduktKategorie:", SelectedProduktKategorieChange);
-  const selectedProduktKategorieAsObjects: ProduktKategorie[] = SelectedProduktKategorieChange.map((produktKategorie) => ({
-    value: produktKategorie,
-    label: produktKategorie, // Du kannst den Wert von 'label' anpassen, falls erforderlich
-  }));
+  const selectedProduktKategorieAsObjects: ProduktKategorie[] =
+    SelectedProduktKategorieChange.map((produktKategorie) => ({
+      value: produktKategorie,
+      label: produktKategorie, // Du kannst den Wert von 'label' anpassen, falls erforderlich
+    }));
   selectedProduktKategorieFromChild.value = selectedProduktKategorieAsObjects;
 };
 
 const filteredProducts = computed(() => {
-  if (selectedFirmenFromChild.value.length === 0 && selectedProduktKategorieFromChild.value.length === 0) {
+  if (
+    selectedFirmenFromChild.value.length === 0 &&
+    selectedProduktKategorieFromChild.value.length === 0
+  ) {
     return products.value; // Wenn keine Firma ausgewählt ist, zeigen Sie alle Produkte an
   }
-  return products.value.filter((product) =>
-    (selectedFirmenFromChild.value.length === 0 || selectedFirmenFromChild.value.some((firma) => firma.value === product.firma)) &&
-    (selectedProduktKategorieFromChild.value.length === 0 || selectedProduktKategorieFromChild.value.some((kategorie) => kategorie.value === product.produktkategorie))
+  return products.value.filter(
+    (product) =>
+      (selectedFirmenFromChild.value.length === 0 ||
+        selectedFirmenFromChild.value.some(
+          (firma) => firma.value === product.firma
+        )) &&
+      (selectedProduktKategorieFromChild.value.length === 0 ||
+        selectedProduktKategorieFromChild.value.some(
+          (kategorie) => kategorie.value === product.produktkategorie
+        ))
   );
 });
 const productKategorieListe = ref([
-  { value: "protein", label: "Protein" },
+  { value: "Protein", label: "Protein" },
   { value: "Creatine", label: "Kreatine" },
   // TODO weitere Optionen
 ]);
