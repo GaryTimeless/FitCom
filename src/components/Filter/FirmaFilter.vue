@@ -16,7 +16,10 @@
   </ion-list>
 </template>
 
+<!-- Alternaitve -->
 <!-- <script lang="ts">
+DAS IST DER VERSUCH ES AN DIE ANDEREN KOMPONENTEN ANZUPASSEN - Die haben nämlich kein export default defineComponent({
+
 import { IonItem, IonList, IonSelect, IonSelectOption } from "@ionic/vue";
 import { Ref, defineComponent, ref } from "vue";
 
@@ -49,7 +52,15 @@ const handleChange = (event: any) => {
 
 </script> -->
 
-<script lang="ts">
+<!-- Übergabe der Daten - Anzeige Kaputt -->
+<!-- <script lang="ts">
+
+  Hiermit funktioniert der Code insofern man die ausgewählten Firmen an eine andere komponente (eltern) übergibt
+  Aber die Komponente an siche spinnt. 
+  Man wählt X1 und X2 und es steht in der Website X1, X1 da
+
+
+
 import { IonItem, IonList, IonSelect, IonSelectOption } from '@ionic/vue';
 import { Ref, defineComponent, ref } from 'vue';
 //TODO seltsam, das hier ein export default ist und so. Oben ein Versuch, das zu umgehen. Klappt nicht. 
@@ -63,7 +74,7 @@ export default defineComponent({
   },
   data() {
     return {
-      selectedValues: [] as string[], // Hier wird ein leeres Array für die ausgewählten Werte initialisiert
+      // selectedValues: [] as string[], // Hier wird ein leeres Array für die ausgewählten Werte initialisiert
     };
   },
   methods: {
@@ -84,6 +95,32 @@ export default defineComponent({
       this.selectedValues = event.detail.value;
       this.$emit('SelectedFirmaChange', this.selectedValues);
     },
+  },
+});
+</script> -->
+
+<!-- Anzeige Oke, keine Übergabe -->
+<script lang="ts">
+
+// Hier funktioniert NUR die Componente - aber die Daten werden nicht weiter gegeben
+
+
+import { IonItem, IonList, IonSelect, IonSelectOption } from '@ionic/vue';
+import { Ref, defineComponent, ref } from 'vue';
+//TODO seltsam, das hier ein export default ist und so. Oben ein Versuch, das zu umgehen. Klappt nicht. 
+export default defineComponent({
+  components: { IonItem, IonList, IonSelect, IonSelectOption },
+  props: {
+    firmen: {
+      type: Array,
+      required: true,
+    },
+  },
+  data() {
+    
+  },
+  methods: {
+    
   },
 });
 </script>
