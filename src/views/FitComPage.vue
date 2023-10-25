@@ -32,13 +32,10 @@
               @SelectedFirmaChange ="handleSelectedFirmen"
               
             />
-            <!-- <FirmaFilter
-              :firmen="firmenListe"
-              @update:SelectedFirmaChange="handleSelectedFirmen"
-              @SelectedFirmaChange ="Test"
-            /> -->
+          
 
-            <ProduktkategorieFilter :productKategorie="productKategorieListe" />
+            <ProduktkategorieFilter :productKategorie="productKategorieListe" 
+            @SelectedProduktKategorieChange="handleSelectedProduktKategorie"/>
             <!-- Price range-->
             <ion-item>
               <ion-label
@@ -279,17 +276,30 @@ const handleSelectedFirmen = (selectedFirma: string[]) => {
   selectedFirmenFromChild.value = selectedFirmenAsObjects;
 };
 
+type ProduktKategorie = { value: string; label: string };
+const selectedProduktKategorieFromChild = ref<ProduktKategorie[]>([]);
+
+const handleSelectedProduktKategorie = (SelectedProduktKategorieChange: string[]) => {
+  console.log("Selected ProduktKategorie:", SelectedProduktKategorieChange);
+  const selectedProduktKategorieAsObjects: ProduktKategorie[] = SelectedProduktKategorieChange.map((produktKategorie) => ({
+    value: produktKategorie,
+    label: produktKategorie, // Du kannst den Wert von 'label' anpassen, falls erforderlich
+  }));
+  selectedProduktKategorieFromChild.value = selectedProduktKategorieAsObjects;
+};
+
 const filteredProducts = computed(() => {
-  if (selectedFirmenFromChild.value.length === 0) {
+  if (selectedFirmenFromChild.value.length === 0 && selectedProduktKategorieFromChild.value.length === 0) {
     return products.value; // Wenn keine Firma ausgewählt ist, zeigen Sie alle Produkte an
   }
   return products.value.filter((product) =>
-    selectedFirmenFromChild.value.some((firma) => firma.value === product.firma)
+    (selectedFirmenFromChild.value.length === 0 || selectedFirmenFromChild.value.some((firma) => firma.value === product.firma)) &&
+    (selectedProduktKategorieFromChild.value.length === 0 || selectedProduktKategorieFromChild.value.some((kategorie) => kategorie.value === product.produktkategorie))
   );
 });
 const productKategorieListe = ref([
   { value: "protein", label: "Protein" },
-  { value: "kreatin", label: "Kreatin" },
+  { value: "Creatine", label: "Kreatine" },
   // TODO weitere Optionen
 ]);
 </script>

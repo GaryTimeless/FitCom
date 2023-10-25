@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
@@ -38,15 +38,15 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/vue';
-import MessageListItem from '@/components/MessageListItem.vue';
-import { getMessages, Message } from '@/data/messages';
+// import MessageListItem from '@/components/MessageListItem.vue';
+// import { getMessages, Message } from '@/data/messages';
 import { ref } from 'vue';
 
-const messages = ref<Message[]>(getMessages());
+// const messages = ref<Message[]>(getMessages());
 
 const refresh = (ev: CustomEvent) => {
   setTimeout(() => {
     ev.detail.complete();
   }, 3000);
 };
-</script>
+</script> -->
