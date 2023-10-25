@@ -17,9 +17,11 @@
         </ion-toolbar>
       </ion-header>
 
-      <!-- List of all Filter-->
-      <!-- TODO alle filter als einzelne Componenten schreiben.-->
+      
+      
       <div class="Container">
+        <!-- List of all Filter-->
+        <!-- TODO alle filter als einzelne Componenten schreiben.-->
         <div class="filter-wrapper">
           <ion-list>
             <!-- Firma Filter - 
@@ -27,7 +29,7 @@
               @update -->
             <FirmaFilter
               :firmen="firmenListe"
-              @SelectedFirmaChange ="Test"
+              @SelectedFirmaChange ="handleSelectedFirmen"
               
             />
             <!-- <FirmaFilter
@@ -209,6 +211,9 @@ const refresh = (ev: CustomEvent) => {
     ev.detail.complete();
   }, 3000);
 };
+
+
+
 const Test = (selectedFirma: string[]) => {
       // Hier erhältst du die ausgewählten Firmen von der Kindkomponente
       console.log('Ausgewählte Firmen in übergeordneter Komponente:', selectedFirma);
@@ -265,9 +270,13 @@ const firmenListe = ref([
 type Firma = { value: string; label: string };
 const selectedFirmenFromChild = ref<Firma[]>([]);
 
-const handleSelectedFirmen = (selected: any[]) => {
-  console.log("Selected firms:", selected);
-  selectedFirmenFromChild.value = selected;
+const handleSelectedFirmen = (selectedFirma: string[]) => {
+  console.log("Selected firms:", selectedFirma);
+  const selectedFirmenAsObjects: Firma[] = selectedFirma.map((firma) => ({
+    value: firma,
+    label: firma, // Du kannst den Wert von 'label' anpassen, falls erforderlich
+  }));
+  selectedFirmenFromChild.value = selectedFirmenAsObjects;
 };
 
 const filteredProducts = computed(() => {
@@ -284,6 +293,7 @@ const productKategorieListe = ref([
   // TODO weitere Optionen
 ]);
 </script>
+
 <style scoped>
 .Container {
   display: flex;
