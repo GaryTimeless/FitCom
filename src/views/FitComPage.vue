@@ -317,9 +317,11 @@ const productKategorieListe = ref([
 
 import PriceRangeFilter from "../components/Filter/PriceRangeFilter.vue";
 const selectedMaxPriceFromChild = ref<number | null>(null);
-const handleValidMaxPrice = (maxPrice: number) => {
+const handleValidMaxPrice = (maxPrice: string) => {
+  
   // Speichere den Wert in selectedMaxPriceFromChild
-  selectedMaxPriceFromChild.value = maxPrice;
+  selectedMaxPriceFromChild.value = parseFloat(maxPrice.replace(',', '.'));
+  
 };
 </script>
 

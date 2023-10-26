@@ -1,55 +1,69 @@
- <template>
-  <div class="price-range">
+<template>
+  <ion-list>
     <ion-item>
-      <ion-label position="stacked">Höchstpreis für 1000g</ion-label>
       <ion-input
-        type="number"
-        @ionInput="validateMaxPrice($event)"
+        :value="inputModel"
+        @ionInput="onInput($event)"
+        ref="ionInputEl"
+        placeholder="Max Preis € "
       ></ion-input>
     </ion-item>
-  </div>
+  </ion-list>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { IonInput, IonAlert } from "@ionic/vue";
-const emit = defineEmits();
-const validateMaxPrice = (ev: any) => {
-    console.log("TEST?")
-  const selectMaxPrice = ev.target.value;
-  if (selectMaxPrice !== null && selectMaxPrice < 0) {
-    const alert = this.$refs.alert;
+import { IonInput, IonItem, IonList } from "@ionic/vue";
+import { defineComponent, ref } from "vue";
 
-    alert.header = "Ungültige Zahl";
-    alert.message = "Bitte nur sinnvolle Zahlen eingeben";
-    alert.buttons = ["OK"];
-
-    alert.present();
-    
-  } else {
-    // Hier können Sie die gültige Höchstpreis-Eingabe verarbeiten, z.B.:
-    emit("validMaxPrice", selectMaxPrice);
-    console.log("max price Set to: " + selectMaxPrice);
-  }
-}
 export default defineComponent({
-  props: {
-    maxPrice: Number,
-  },
-  data() {
-  },
+  components: { IonInput, IonItem, IonList },
   methods: {
-    validateMaxPrice, // Verwenden Sie die oben definierte Funktion
+    EmitValue(eventName: string, value: any) {
+      console.log('Diese Methode wurde aufgerufen!');
+      this.$emit(eventName, value);
+    },
+  },
+  setup(_, context) {
+    const ionInputEl = ref();
+    const inputModel = ref("");
+    const onInput = (ev) => {
+      const selectMaxPrice = ev.target!.value;
+      const filteredValue = 
+        selectMaxPrice.replace(/[^0-9]+/g, "")
+
+    //   if (filteredValue !== null && filteredValue < 0) {
+    //     console.log("WRONG number");
+    //     inputModel.value = "1";
+    //   }
+
+      console.log(filteredValue);
+    context.emit("validMaxPrice", filteredValue);
+
+
+        const inputCmp = ionInputEl.value;
+        if (inputCmp !== undefined) {
+          inputCmp.$el.value = filteredValue;
+        }
+        
+    };
+
+    return { ionInputEl, inputModel, onInput };
   },
 });
 </script>
 
-<style scoped></style>
+<!-- const selectMaxPrice = ev.target.value;
+if (selectMaxPrice !== null && selectMaxPrice < 0) {
+  const alert = this.$refs.alert;
 
-<!-- <ion-alert
-      ref="alert"
-      v-model="isAlertOpen"
-      header="Benachrichtigung"
-      message="Dies ist eine Beispiel-Benachrichtigung."
-      :buttons="alertButtons"
-    ></ion-alert> -->
+  alert.header = "Ungültige Zahl";
+  alert.message = "Bitte nur sinnvolle Zahlen eingeben";
+  alert.buttons = ["OK"];
+
+  alert.present();
+  
+} else {
+  // Hier können Sie die gültige Höchstpreis-Eingabe verarbeiten, z.B.:
+  emit("validMaxPrice", selectMaxPrice);
+  console.log("max price Set to: " + selectMaxPrice);
+} -->
