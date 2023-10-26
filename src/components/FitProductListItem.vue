@@ -10,10 +10,10 @@
       <ion-label class="table-cell">{{ product.firma }}</ion-label>
       <ion-label class="table-cell">{{ product.produktkategorie }}</ion-label>
       <ion-label class="table-cell">{{ product.name }}</ion-label>
-      <ion-label class="table-cell">{{ product.preisPerPackung }}€</ion-label>
-      <ion-label class="table-cell">{{ product.portionierung }}</ion-label>
+      <ion-label class="table-cell">{{ product.preisPerPackung }} €</ion-label>
+      <ion-label class="table-cell">{{ product.preisPerKG }} €</ion-label>
       <ion-label class="table-cell">{{ product.portionenPerPkg }}</ion-label>
-      <ion-label class="table-cell">{{ product.gewichtPerPkg }}€</ion-label>
+      <ion-label class="table-cell">{{ product.gewichtPerPkg }} g </ion-label>
       <ion-label class="table-cell">{{ product.vegan }}</ion-label>
     </ion-item>
   </div>

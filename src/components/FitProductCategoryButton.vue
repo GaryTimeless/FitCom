@@ -45,18 +45,18 @@
       >
         <ion-icon :icon="swapVerticalOutline" style="margin-right: 8px">
         </ion-icon>
-        Preis/Pkg</ion-button
+        Preis/Pakg</ion-button
       >
        <!-- Portionierung -->
       <ion-button
-        @click="handleButtonClick('Portionierung')"
+        @click="handleButtonClick('PreisProKG')"
         fill="clear"
         style="color: antiquewhite"
         class="table-button"
       >
         <ion-icon :icon="swapVerticalOutline" style="margin-right: 8px">
         </ion-icon>
-        Portionierung</ion-button
+        Preis/1000g</ion-button
       >
       <!-- PortionenPerPkg -->
       <ion-button
@@ -67,7 +67,7 @@
       >
         <ion-icon :icon="swapVerticalOutline" style="margin-right: 8px">
         </ion-icon>
-        PortionenPerPkg</ion-button
+        Portionen/PAKG</ion-button
       >
 
       <!-- GewichtPerPkg -->
@@ -79,7 +79,7 @@
       >
         <ion-icon :icon="swapVerticalOutline" style="margin-right: 8px">
         </ion-icon>
-        GewichtPerPkg</ion-button
+        Gewicht/PAKG</ion-button
       >
 
       <!-- Vegan -->

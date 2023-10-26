@@ -189,7 +189,7 @@ function fetchProductsFromSheet() {
         preisPerKG: row[5],
         portionierung: row[6],
         portionenPerPkg: row[7],
-        gewichtPerPkg: row[8],
+        gewichtPerPkg: row[10],
       }));
     });
 }
@@ -228,6 +228,10 @@ const sortProducts = (key: string) => {
   }
   if (key === "Preis/Pkg") {
     products.value.sort((a, b) => a.preisPerPackung - b.preisPerPackung);
+    console.log(products);
+  }
+  if (key === "PreisProKG") {
+    products.value.sort((a, b) => a.preisPerKG - b.preisPerKG);
     console.log(products);
   }
   if (key === "Produktname") {
