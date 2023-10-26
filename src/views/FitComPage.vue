@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Fitness Compare</ion-title>
+        <ion-title>Comparison of fitness products by G.Schenk</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -34,8 +34,13 @@
               :productKategorie="productKategorieListe"
               @SelectedProduktKategorieChange="handleSelectedProduktKategorie"
             />
+
+            <PriceRangeFilter
+              @validMaxPrice="handleValidMaxPrice"
+            />
+
             <!-- Price range-->
-            <ion-item>
+            <!-- <ion-item>
               <ion-label
                 style="font-size: 30px; padding-bottom: 10px"
                 position="stacked"
@@ -52,7 +57,7 @@
                 <ion-label position="stacked">Höchstpreis</ion-label>
                 <ion-input v-model="maxPrice" type="number"></ion-input>
               </ion-item>
-            </div>
+            </div> -->
 
             <!-- VEGAN-->
             <ion-item>
@@ -131,19 +136,6 @@ import FitProductCategoryButton from "@/components/FitProductCategoryButton.vue"
 import { getProducts, FitProduct } from "@/data/FitProducts";
 
 import { watch, ref, onMounted, computed } from "vue";
-
-const minPrice = ref(null);
-const maxPrice = ref(null);
-
-watch(minPrice, (newVal) => {
-  //TODO logik einbauen
-  // Logik für Mindestpreisänderung
-});
-
-watch(maxPrice, (newVal) => {
-  //TODO logik einbauen
-  // Logik für Höchstpreisänderung
-});
 
 declare var gapi: any;
 
@@ -262,6 +254,7 @@ const packSize = ref({ lower: 100, upper: 2000 });
 import FirmaFilter from "../components/Filter/FirmaFilter.vue";
 import ProduktkategorieFilter from "../components/Filter/ProduktkategorieFilter.vue";
 
+//TODO Dummies austauschen? Die Frage ist hier oder in der Ecxel auf nem zweiten sheet?
 const firmenListe = ref([
   { value: "ESN", label: "ESN" },
   { value: "Bulk", label: "Bulk" },
@@ -297,7 +290,8 @@ const handleSelectedProduktKategorie = (
 const filteredProducts = computed(() => {
   if (
     selectedFirmenFromChild.value.length === 0 &&
-    selectedProduktKategorieFromChild.value.length === 0
+    selectedProduktKategorieFromChild.value.length === 0 &&
+    selectedMaxPriceFromChild.value === null
   ) {
     return products.value; // Wenn keine Firma ausgewählt ist, zeigen Sie alle Produkte an
   }
@@ -310,7 +304,9 @@ const filteredProducts = computed(() => {
       (selectedProduktKategorieFromChild.value.length === 0 ||
         selectedProduktKategorieFromChild.value.some(
           (kategorie) => kategorie.value === product.produktkategorie
-        ))
+        )) &&
+      (selectedMaxPriceFromChild.value === null || // Hier prüfen wir, ob selectedMaxPriceFromChild null ist oder der Preis kleiner/gleich ist
+        product.preisPerKG <= selectedMaxPriceFromChild.value)
   );
 });
 const productKategorieListe = ref([
@@ -318,6 +314,13 @@ const productKategorieListe = ref([
   { value: "Creatine", label: "Kreatine" },
   // TODO weitere Optionen
 ]);
+
+import PriceRangeFilter from "../components/Filter/PriceRangeFilter.vue";
+const selectedMaxPriceFromChild = ref<number | null>(null);
+const handleValidMaxPrice = (maxPrice: number) => {
+  // Speichere den Wert in selectedMaxPriceFromChild
+  selectedMaxPriceFromChild.value = maxPrice;
+};
 </script>
 
 <style scoped>
