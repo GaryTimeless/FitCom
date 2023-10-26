@@ -19,7 +19,7 @@ export default defineComponent({
   components: { IonInput, IonItem, IonList },
   methods: {
     EmitValue(eventName: string, value: any) {
-      console.log('Diese Methode wurde aufgerufen!');
+      console.log("Diese Methode wurde aufgerufen!");
       this.$emit(eventName, value);
     },
   },
@@ -27,19 +27,21 @@ export default defineComponent({
     const ionInputEl = ref();
     const inputModel = ref("");
     const onInput = (ev) => {
+      // Wert aus dem Imput Feld wird in const gespeichert
       const selectMaxPrice = ev.target!.value;
-      const filteredValue = 
-        selectMaxPrice.replace(/[^0-9]+/g, "")
 
-      console.log(filteredValue);
-    context.emit("validMaxPrice", filteredValue);
+      //Nur Zahlen sind im Feld erlaubt. alles andere wird durch "" ersetzt.
+      const filteredValue = selectMaxPrice.replace(/[^0-9]+/g, "");
 
+      
+      // Wird an ParentKomponente vermittelt
+      context.emit("validMaxPrice", filteredValue);
 
-        const inputCmp = ionInputEl.value;
-        if (inputCmp !== undefined) {
-          inputCmp.$el.value = filteredValue;
-        }
-        
+      // Das sorgt dafür, dass es so aussehen lässt, dass man keinen anderen Wert als den oben genannten eingeben kann. 
+      const inputCmp = ionInputEl.value;
+      if (inputCmp !== undefined) {
+        inputCmp.$el.value = filteredValue;
+      }
     };
 
     return { ionInputEl, inputModel, onInput };
