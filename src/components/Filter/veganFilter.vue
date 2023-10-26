@@ -1,13 +1,13 @@
 <template>
     <ion-item>
       <ion-label>Vegan?</ion-label>
-      <ion-checkbox v-model="isChecked" @ionChange="handleCheckboxChange"></ion-checkbox>
+      <ion-checkbox :checked="isChecked" @ionChange="handleCheckboxChange"></ion-checkbox>
     </ion-item>
   </template>
   
   <script lang="ts">
   import { IonItem, IonLabel, IonCheckbox } from "@ionic/vue";
-  import { defineComponent, ref, onMounted } from "vue";
+  import { defineComponent, ref } from "vue";
   
   export default defineComponent({
     components: {
@@ -25,7 +25,7 @@
       const handleCheckboxChange = () => {
         isChecked.value = !isChecked.value;
         // Emitiere den Wert an die übergeordnete Komponente
-        console.log("test")
+        console.log(isChecked.value)
         emit("update:modelValue", isChecked.value);
       };
   
@@ -37,7 +37,3 @@
   });
   </script>
   
-  
-  
-  
-   <!-- <ion-checkbox  slot="start" v-model="isChecked">Vegan?</ion-checkbox> -->

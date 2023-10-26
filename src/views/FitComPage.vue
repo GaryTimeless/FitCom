@@ -307,7 +307,7 @@ const handleValidMaxPrice = (maxPrice: string) => {
   selectedMaxPriceFromChild.value = parseFloat(maxPrice.replace(',', '.'));
   
 };
-const isCheckedref = ref(false);
+const isCheckedref = ref(true);
 
 
 import veganFilter from "@/components/Filter/veganFilter.vue";
