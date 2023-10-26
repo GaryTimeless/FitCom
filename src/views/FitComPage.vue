@@ -39,31 +39,12 @@
               @validMaxPrice="handleValidMaxPrice"
             />
 
-            <!-- Price range-->
-            <!-- <ion-item>
-              <ion-label
-                style="font-size: 30px; padding-bottom: 10px"
-                position="stacked"
-                >Preisrange</ion-label
-              >
-            </ion-item>
-            <div class="price-range">
-              <ion-item>
-                <ion-label position="stacked">Mindestpreis</ion-label>
-                <ion-input v-model="minPrice" type="number"></ion-input>
-              </ion-item>
-
-              <ion-item>
-                <ion-label position="stacked">Höchstpreis</ion-label>
-                <ion-input v-model="maxPrice" type="number"></ion-input>
-              </ion-item>
-            </div> -->
-
             <!-- VEGAN-->
-            <ion-item>
-              <ion-label>Vegan</ion-label>
-              <ion-checkbox slot="start" v-model="isVegan"></ion-checkbox>
-            </ion-item>
+            <veganFilter
+            v-model="isCheckedref"
+            />
+
+            
 
             <!-- Packungsgröße-->
             <ion-item>
@@ -291,7 +272,8 @@ const filteredProducts = computed(() => {
   if (
     selectedFirmenFromChild.value.length === 0 &&
     selectedProduktKategorieFromChild.value.length === 0 &&
-    selectedMaxPriceFromChild.value === null
+    selectedMaxPriceFromChild.value === null &&
+    !isCheckedref
   ) {
     return products.value; // Wenn keine Firma ausgewählt ist, zeigen Sie alle Produkte an
   }
@@ -307,6 +289,8 @@ const filteredProducts = computed(() => {
         )) &&
       (selectedMaxPriceFromChild.value === null || // Hier prüfen wir, ob selectedMaxPriceFromChild null ist oder der Preis kleiner/gleich ist
         product.preisPerKG <= selectedMaxPriceFromChild.value)
+        &&
+      (isCheckedref.value == false|| product.vegan == "yes")
   );
 });
 const productKategorieListe = ref([
@@ -323,6 +307,17 @@ const handleValidMaxPrice = (maxPrice: string) => {
   selectedMaxPriceFromChild.value = parseFloat(maxPrice.replace(',', '.'));
   
 };
+const isCheckedref = ref(false);
+
+
+import veganFilter from "@/components/Filter/veganFilter.vue";
+// const selectedIsVeganFromChild = ref<boolean>(false);
+
+// console.log("Übertrag hat geklappt. "+isChecked.value + typeof isChecked)
+// selectedIsVeganFromChild.value =isChecked
+// console.log("Ütest. "+selectedIsVeganFromChild.value)
+
+
 </script>
 
 <style scoped>

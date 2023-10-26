@@ -18,10 +18,6 @@ import { defineComponent, ref } from "vue";
 export default defineComponent({
   components: { IonInput, IonItem, IonList },
   methods: {
-    EmitValue(eventName: string, value: any) {
-      console.log("Diese Methode wurde aufgerufen!");
-      this.$emit(eventName, value);
-    },
   },
   setup(_, context) {
     const ionInputEl = ref();
