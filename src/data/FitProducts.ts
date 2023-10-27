@@ -8,7 +8,7 @@ export interface FitProduct {
   preisPerKG: number;
   portionierung: number;
   portionenPerPkg: number;
-  gewichtPerPkg: number;
+  gewichtPerPkg: string;
 }
 
 const FitProducts: FitProduct[] = [

@@ -35,18 +35,12 @@
               @SelectedProduktKategorieChange="handleSelectedProduktKategorie"
             />
 
-            <PriceRangeFilter
-              @validMaxPrice="handleValidMaxPrice"
-            />
+            <PriceRangeFilter @validMaxPrice="handleValidMaxPrice" />
 
             <!-- VEGAN-->
-            <veganFilter
-            @update:modelValue="handleVeganChange"
-            />
+            <veganFilter @update:modelValue="handleVeganChange" />
 
-            <PakgSizeFilter
-            @selectedPakgSize="handleSelectedPakgSize"/>
-          
+            <PakgSizeFilter @selectedPakgSize="handleSelectedPakgSize" />
           </ion-list>
         </div>
 
@@ -77,15 +71,15 @@
 </template>
 
 <script setup lang="ts">
-
 import PakgSizeFilter from "@/components/Filter/PakgSizeFilter.vue";
-const handleSelectedPakgSize = (value: { lower: number, upper: number }) => {
-  console.log("Selected package size range:", value);
-  // Verarbeiten Sie die Daten hier weiter
+const SelectedPakgSizeFromChild = ref<{ lower: number; upper: number }>({
+  lower: 0,
+  upper: 0,
+});
+const handleSelectedPakgSize = (PakgSize: any) => {
+  SelectedPakgSizeFromChild.value.lower = PakgSize.value.lower;
+  SelectedPakgSizeFromChild.value.upper = PakgSize.value.upper;
 };
-
-
-const SelectedPakgSizeFromChild = ref<number | null>(null);
 
 import {
   IonContent,
@@ -254,30 +248,57 @@ const handleSelectedProduktKategorie = (
 };
 
 const filteredProducts = computed(() => {
+  // Wenn alle Filter deaktiviert sind
   if (
     selectedFirmenFromChild.value.length === 0 &&
     selectedProduktKategorieFromChild.value.length === 0 &&
     selectedMaxPriceFromChild.value === null &&
-    !isCheckedref
+    !isCheckedref.value &&
+    SelectedPakgSizeFromChild.value.lower === 0 &&
+    SelectedPakgSizeFromChild.value.upper === 0
   ) {
-    return products.value; // Wenn keine Firma ausgewählt ist, zeigen Sie alle Produkte an
+    console.log("All Filter Off: First time?");
+    return products.value;
   }
-  return products.value.filter(
-    (product) =>
-      (selectedFirmenFromChild.value.length === 0 ||
-        selectedFirmenFromChild.value.some(
-          (firma) => firma.value === product.firma
-        )) &&
-      (selectedProduktKategorieFromChild.value.length === 0 ||
-        selectedProduktKategorieFromChild.value.some(
-          (kategorie) => kategorie.value === product.produktkategorie
-        )) &&
-      (selectedMaxPriceFromChild.value === null || // Hier prüfen wir, ob selectedMaxPriceFromChild null ist oder der Preis kleiner/gleich ist
-        product.preisPerKG <= selectedMaxPriceFromChild.value)
-        &&
-      (isCheckedref.value == false|| product.vegan == "yes")
-  );
+
+  return products.value.filter((product) => {
+    const gewichtAsNumber = parseInt(product.gewichtPerPkg, 10);
+
+    const isFirmValid =
+      selectedFirmenFromChild.value.length === 0 ||
+      selectedFirmenFromChild.value.some(
+        (firma) => firma.value === product.firma
+      );
+
+    const isProductCategoryValid =
+      selectedProduktKategorieFromChild.value.length === 0 ||
+      selectedProduktKategorieFromChild.value.some(
+        (kategorie) => kategorie.value === product.produktkategorie
+      );
+
+    const isPriceValid =
+      selectedMaxPriceFromChild.value === null ||
+      product.preisPerKG <= selectedMaxPriceFromChild.value;
+
+    const isVeganValid =
+      !isCheckedref.value || product.vegan == "yes";
+
+    const isPakgSizeValid =
+      (SelectedPakgSizeFromChild.value.lower === 0 &&
+        SelectedPakgSizeFromChild.value.upper === 0) ||
+      (gewichtAsNumber >= SelectedPakgSizeFromChild.value.lower &&
+        gewichtAsNumber <= SelectedPakgSizeFromChild.value.upper);
+
+    return (
+      isFirmValid &&
+      isProductCategoryValid &&
+      isPriceValid &&
+      isVeganValid &&
+      isPakgSizeValid
+    );
+  });
 });
+
 const productKategorieListe = ref([
   { value: "Protein", label: "Protein" },
   { value: "Creatine", label: "Kreatine" },
@@ -287,18 +308,15 @@ const productKategorieListe = ref([
 import PriceRangeFilter from "../components/Filter/PriceRangeFilter.vue";
 const selectedMaxPriceFromChild = ref<number | null>(null);
 const handleValidMaxPrice = (maxPrice: string) => {
-  
   // Speichere den Wert in selectedMaxPriceFromChild
-  selectedMaxPriceFromChild.value = parseFloat(maxPrice.replace(',', '.'));
-  
+  selectedMaxPriceFromChild.value = parseFloat(maxPrice.replace(",", "."));
 };
 
 const handleVeganChange = (value) => {
-      isCheckedref.value = value;
-      // Führe hier weitere Aktionen basierend auf dem geänderten Wert aus
-    };
+  isCheckedref.value = value;
+  // Führe hier weitere Aktionen basierend auf dem geänderten Wert aus
+};
 const isCheckedref = ref(false);
-
 
 import veganFilter from "@/components/Filter/veganFilter.vue";
 // const selectedIsVeganFromChild = ref<boolean>(false);
@@ -306,8 +324,6 @@ import veganFilter from "@/components/Filter/veganFilter.vue";
 // console.log("Übertrag hat geklappt. "+isChecked.value + typeof isChecked)
 // selectedIsVeganFromChild.value =isChecked
 // console.log("Ütest. "+selectedIsVeganFromChild.value)
-
-
 </script>
 
 <style scoped>

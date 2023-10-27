@@ -30,7 +30,7 @@ export default defineComponent({
   components: { IonRange },
   methods: {
     onIonChange({ detail}) {
-      console.log("ionChange emitted value:", detail.value);
+      console.log("ionChange emitted value:", typeof detail.value.upper);
       this.$emit("selectedPakgSize", detail)
     },
   },
