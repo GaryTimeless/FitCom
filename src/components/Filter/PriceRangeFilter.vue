@@ -27,7 +27,11 @@ export default defineComponent({
       const selectMaxPrice = ev.target!.value;
 
       //Nur Zahlen sind im Feld erlaubt. alles andere wird durch "" ersetzt.
-      const filteredValue = selectMaxPrice.replace(/[^0-9]+/g, "");
+      let filteredValue = selectMaxPrice.replace(/[^0-9]+/g, "");
+      if (filteredValue === "") {
+    // Wenn kein Wert übrig bleibt, setze einen Standardwert
+    filteredValue = "10000";
+  }
 
       
       // Wird an ParentKomponente vermittelt

@@ -41,7 +41,7 @@
 
             <!-- VEGAN-->
             <veganFilter
-            v-model="isCheckedref"
+            @update:modelValue="handleVeganChange"
             />
 
             
@@ -72,6 +72,9 @@
                 <ion-icon size="small" slot="end" name="add-circle"></ion-icon>
               </ion-range>
             </ion-item>
+
+            <PakgSizeFilter/>
+          
           </ion-list>
         </div>
 
@@ -102,6 +105,10 @@
 </template>
 
 <script setup lang="ts">
+
+import PakgSizeFilter from "@/components/Filter/PakgSizeFilter.vue";
+
+
 import {
   IonContent,
   IonHeader,
@@ -307,7 +314,12 @@ const handleValidMaxPrice = (maxPrice: string) => {
   selectedMaxPriceFromChild.value = parseFloat(maxPrice.replace(',', '.'));
   
 };
-const isCheckedref = ref(true);
+
+const handleVeganChange = (value) => {
+      isCheckedref.value = value;
+      // Führe hier weitere Aktionen basierend auf dem geänderten Wert aus
+    };
+const isCheckedref = ref(false);
 
 
 import veganFilter from "@/components/Filter/veganFilter.vue";
