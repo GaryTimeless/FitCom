@@ -17,7 +17,7 @@
     @ionChange="onIonChange"
   >
     <ion-icon size="small" slot="start" name="remove-circle"></ion-icon>
-    <ion-icon size="small" slot="end" name="add-circle"></ion-icon>
+    <ion-icon size="small" slot="end" name="add-circle" ></ion-icon>
   </ion-range>
 </template>
 
@@ -36,3 +36,48 @@ export default defineComponent({
   },
 });
 </script>
+
+
+<style>
+  ion-range::part(tick) {
+    background: #a2d2ff;
+  }
+
+  ion-range::part(tick-active) {
+    background: #bde0fe;
+  }
+
+  ion-range::part(pin) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #0b7506;
+    color: #fff;
+
+    border-radius: 50%;
+    transform: scale(1.01);
+
+    top: -20px;
+
+    min-width: 28px;
+    height: 28px;
+    transition: transform 120ms ease, background 120ms ease;
+  }
+
+  ion-range::part(pin)::before {
+    content: none;
+  }
+
+  ion-range::part(knob) {
+    background: #026d0d;
+  }
+
+  ion-range::part(bar) {
+    background: #0b3f01;
+  }
+
+  ion-range::part(bar-active) {
+    background: #35c700;
+  }
+</style>

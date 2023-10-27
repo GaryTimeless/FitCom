@@ -17,8 +17,7 @@ import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   components: { IonInput, IonItem, IonList },
-  methods: {
-  },
+  methods: {},
   setup(_, context) {
     const ionInputEl = ref();
     const inputModel = ref("");
@@ -28,16 +27,11 @@ export default defineComponent({
 
       //Nur Zahlen sind im Feld erlaubt. alles andere wird durch "" ersetzt.
       let filteredValue = selectMaxPrice.replace(/[^0-9]+/g, "");
-      if (filteredValue === "") {
-    // Wenn kein Wert übrig bleibt, setze einen Standardwert
-    filteredValue = "10000";
-  }
 
-      
       // Wird an ParentKomponente vermittelt
-      context.emit("validMaxPrice", filteredValue);
+      context.emit("validMaxPrice", filteredValue || "10000");
 
-      // Das sorgt dafür, dass es so aussehen lässt, dass man keinen anderen Wert als den oben genannten eingeben kann. 
+      // Das sorgt dafür, dass es so aussehen lässt, dass man keinen anderen Wert als den oben genannten eingeben kann.
       const inputCmp = ionInputEl.value;
       if (inputCmp !== undefined) {
         inputCmp.$el.value = filteredValue;
