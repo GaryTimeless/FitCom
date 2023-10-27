@@ -5,7 +5,7 @@
         :value="inputModel"
         @ionInput="onInput($event)"
         ref="ionInputEl"
-        placeholder="Max Preis € "
+        placeholder="Max Preis € (für €/1KG)"
       ></ion-input>
     </ion-item>
   </ion-list>
