@@ -44,36 +44,8 @@
             @update:modelValue="handleVeganChange"
             />
 
-            
-
-            <!-- Packungsgröße-->
-            <ion-item>
-              <ion-label
-                style="padding: 0 0 5% 0; width: 150px; font-size: 20px"
-                position="stacked"
-                >Pkg (g)</ion-label
-              >
-              <ion-range
-                aria-label="Dual Knobs Range"
-                :dual-knobs="true"
-                :min="500"
-                :max="5000"
-                :value="{ lower: 500, upper: 1000 }"
-                :ticks="true"
-                :snaps="true"
-                :pin="true"
-                :step="500"
-              >
-                <ion-icon
-                  size="small"
-                  slot="start"
-                  name="remove-circle"
-                ></ion-icon>
-                <ion-icon size="small" slot="end" name="add-circle"></ion-icon>
-              </ion-range>
-            </ion-item>
-
-            <PakgSizeFilter/>
+            <PakgSizeFilter
+            @selectedPakgSize="handleSelectedPakgSize"/>
           
           </ion-list>
         </div>
@@ -107,7 +79,13 @@
 <script setup lang="ts">
 
 import PakgSizeFilter from "@/components/Filter/PakgSizeFilter.vue";
+const handleSelectedPakgSize = (value: { lower: number, upper: number }) => {
+  console.log("Selected package size range:", value);
+  // Verarbeiten Sie die Daten hier weiter
+};
 
+
+const SelectedPakgSizeFromChild = ref<number | null>(null);
 
 import {
   IonContent,
