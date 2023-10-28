@@ -20,11 +20,18 @@
   <script lang="ts">
 import { IonItem, IonList, IonSelect, IonSelectOption } from '@ionic/vue';
 import { Ref, defineComponent, ref } from 'vue';
+
+
+type ProduktKategorieType = {
+  value: string;
+  label: string;
+};
+
 export default defineComponent({
   components: { IonItem, IonList, IonSelect, IonSelectOption },
-    props: {
-      productKategorie: {
-        type: Array,
+  props: {
+    productKategorie: {
+      type: Array as () => ProduktKategorieType[],
         required: true,
       },
     },

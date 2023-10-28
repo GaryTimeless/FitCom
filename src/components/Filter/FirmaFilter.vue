@@ -18,11 +18,17 @@
 <script lang="ts">
 import { IonItem, IonList, IonSelect, IonSelectOption } from "@ionic/vue";
 import { Ref, defineComponent, ref } from "vue";
+
+type Firma = {
+  value: string;
+  label: string;
+};
+
 export default defineComponent({
   components: { IonItem, IonList, IonSelect, IonSelectOption },
   props: {
     firmen: {
-      type: Array,
+      type: Array as () => Firma[],
       required: true,
     },
   },

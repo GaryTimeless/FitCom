@@ -93,7 +93,7 @@ import {
 } from "@ionic/vue";
 import FitProductListItem from "@/components/FitProductListItem.vue";
 import FitProductCategoryButton from "@/components/FitProductCategoryButton.vue";
-import { getProducts, FitProduct } from "@/data/FitProducts";
+import { FitProduct } from "@/data/FitProducts";
 
 import { watch, ref, onMounted, computed } from "vue";
 
@@ -196,7 +196,11 @@ const sortProducts = (key: string) => {
     products.value.sort((a, b) => a.portionenPerPkg - b.portionenPerPkg);
   }
   if (key === "GewichtPerPkg") {
-    products.value.sort((a, b) => a.gewichtPerPkg - b.gewichtPerPkg);
+    products.value.sort((a, b) => {
+      const numA = parseFloat(a.gewichtPerPkg);
+      const numB = parseFloat(b.gewichtPerPkg);
+      return numA - numB ;
+    });
   }
   if (key === "vegan") {
     products.value.sort((a, b) => {
@@ -280,8 +284,7 @@ const filteredProducts = computed(() => {
       selectedMaxPriceFromChild.value === null ||
       product.preisPerKG <= selectedMaxPriceFromChild.value;
 
-    const isVeganValid =
-      !isCheckedref.value || product.vegan == "yes";
+    const isVeganValid = !isCheckedref.value || product.vegan == "yes";
 
     const isPakgSizeValid =
       (SelectedPakgSizeFromChild.value.lower === 0 &&
@@ -312,7 +315,7 @@ const handleValidMaxPrice = (maxPrice: string) => {
   selectedMaxPriceFromChild.value = parseFloat(maxPrice.replace(",", "."));
 };
 
-const handleVeganChange = (value) => {
+const handleVeganChange = (value: any) => {
   isCheckedref.value = value;
   // Führe hier weitere Aktionen basierend auf dem geänderten Wert aus
 };

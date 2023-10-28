@@ -6,7 +6,6 @@
       :detail="false"
       style="display: flex; flex-wrap: nowrap"
     >
-    <!-- TODO die values passen nicht zu den Kategorein. ich glaube Portionierung hat € Zeichen? -->
       <ion-label class="table-cell">{{ product.firma }}</ion-label>
       <ion-label class="table-cell">{{ product.produktkategorie }}</ion-label>
       <ion-label class="table-cell">{{ product.name }}</ion-label>

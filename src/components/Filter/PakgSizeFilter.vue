@@ -29,9 +29,9 @@ import { defineComponent } from "vue";
 export default defineComponent({
   components: { IonRange },
   methods: {
-    onIonChange({ detail}) {
-      console.log("ionChange emitted value:", typeof detail.value.upper);
-      this.$emit("selectedPakgSize", detail)
+    onIonChange(event: { detail: any }) {
+      console.log("ionChange emitted value:", typeof event.detail.value.upper);
+      this.$emit("selectedPakgSize", event.detail)
     },
   },
 });

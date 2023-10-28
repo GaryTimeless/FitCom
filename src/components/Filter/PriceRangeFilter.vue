@@ -21,7 +21,7 @@ export default defineComponent({
   setup(_, context) {
     const ionInputEl = ref();
     const inputModel = ref("");
-    const onInput = (ev) => {
+    const onInput = (ev: any) => {
       // Wert aus dem Imput Feld wird in const gespeichert
       const selectMaxPrice = ev.target!.value;
 
