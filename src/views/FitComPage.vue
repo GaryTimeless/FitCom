@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Comparison of fitness products by G.Schenk</ion-title>
+        <ion-title>Comparison of fitness products by G.Schenk 2</ion-title>
       </ion-toolbar>
     </ion-header>
 
