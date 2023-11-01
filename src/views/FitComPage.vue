@@ -145,9 +145,13 @@ function fetchProductsFromSheet() {
       }));
 
       const uniqueFirmen = [...new Set(products.value.map(product => product.firma))];
-  
-  // Aktualisieren Sie firmenListe
-  firmenListe.value = uniqueFirmen.map(firma => ({ value: firma, label: firma }));
+      const uniqueProduktKategorien = [...new Set(products.value.map(product => product.produktkategorie))];
+
+      // Aktualisiere firmenListe
+      firmenListe.value = uniqueFirmen.map(firma => ({ value: firma, label: firma }));
+
+      // Aktualisiere productKategorieListe
+      productKategorieListe.value = uniqueProduktKategorien.map(kategorie => ({ value: kategorie, label: kategorie }));
     });
 }
 
