@@ -36,13 +36,29 @@ var count: 1;
 <style scoped>
 .table-cell {
   border-right: 1px solid #e5e5e5;
-  background-color: rgb(48, 48, 24);
   padding: 10px;
   min-width: 200px;
   text-align: center;
+  /* Entfernen Sie die Hintergrundfarbe hier, da sie unten definiert wird */
 }
 
 .table-cell:last-child {
   border-right: none;
+}
+
+/* Standardstil für Light Mode */
+@media (prefers-color-scheme: light), (prefers-color-scheme: no-preference) {
+  .table-cell {
+    background-color: #ffffff; /* Helle Hintergrundfarbe für Light Mode */
+    color: #000000; /* Dunkle Schriftfarbe für bessere Lesbarkeit im Light Mode */
+  }
+}
+
+/* Stil für Dark Mode */
+@media (prefers-color-scheme: dark) {
+  .table-cell {
+    background-color: rgb(48, 48, 24); /* Dunkle Hintergrundfarbe für Dark Mode */
+    color: #ffffff; /* Helle Schriftfarbe für Dark Mode */
+  }
 }
 </style>
