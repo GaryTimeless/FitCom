@@ -143,6 +143,11 @@ function fetchProductsFromSheet() {
         portionenPerPkg: row[7],
         gewichtPerPkg: row[10],
       }));
+
+      const uniqueFirmen = [...new Set(products.value.map(product => product.firma))];
+  
+  // Aktualisieren Sie firmenListe
+  firmenListe.value = uniqueFirmen.map(firma => ({ value: firma, label: firma }));
     });
 }
 
@@ -219,11 +224,7 @@ import FirmaFilter from "../components/Filter/FirmaFilter.vue";
 import ProduktkategorieFilter from "../components/Filter/ProduktkategorieFilter.vue";
 
 //TODO Dummies austauschen? Die Frage ist hier oder in der Ecxel auf nem zweiten sheet?
-const firmenListe = ref([
-  { value: "ESN", label: "ESN" },
-  { value: "Bulk", label: "Bulk" },
-  { value: "BodyLab", label: "BodyLab" },
-]);
+const firmenListe = ref([]);
 type Firma = { value: string; label: string };
 const selectedFirmenFromChild = ref<Firma[]>([]);
 
