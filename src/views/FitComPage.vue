@@ -21,7 +21,7 @@
         <!-- List of all Filter-->
         <!-- TODO alle filter als einzelne Componenten schreiben.-->
         <div class="filter-wrapper">
-          <ion-list>
+          <ion-list >
             <!-- Firma Filter - 
               :firmen wird eine Lise von Firmen mitgegeben
               @update -->
@@ -46,7 +46,7 @@
 
         <!-- List of all Products-->
         <div class="list-wrapper">
-          <ion-list>
+          <ion-list class="dark-list">
             <FitProductCategoryButton
               @sort="sortProducts"
             ></FitProductCategoryButton>
@@ -337,6 +337,7 @@ import veganFilter from "@/components/Filter/veganFilter.vue";
 .Container {
   display: flex;
   align-items: start;
+  background-color: #363434;
 }
 .filter-wrapper {
   flex: 0 0 25%;
@@ -345,6 +346,7 @@ import veganFilter from "@/components/Filter/veganFilter.vue";
     25% - 60px
   ); /* Nimmt 25% der Breite minus 60px (30px auf jeder Seite) ein */
   margin: 10% 0 0 5%;
+  background-color: #363434;
 }
 
 .pckLabel {
@@ -361,6 +363,7 @@ import veganFilter from "@/components/Filter/veganFilter.vue";
   margin-right: 10%;
   flex: 1; /* Nimmt den verbleibenden Raum ein */
   overflow-x: auto;
+  background-color: #363434;
 }
 .filter-wrapper ion-label {
   margin: 0; /* Entfernt den Margin */
@@ -414,4 +417,22 @@ ion-range::part(bar-active) {
   display: flex;
   justify-content: space-between;
 }
+
+ion-content {
+  --background: #363434; /* Dunklere Hintergrundfarbe für Light Mode */
+}
+
+/* Stil für Dark Mode */
+@media (prefers-color-scheme: dark) {
+  ion-content {
+    --background: #121212; /* Dunkle Hintergrundfarbe für Dark Mode */
+  }
+}
+
+.dark-list {
+    background-color: #2a2a2a; /* This is a dark gray color */
+    color: #fff; /* This will make the text white to contrast the dark background */
+}
+
+
 </style>
