@@ -418,21 +418,7 @@ ion-range::part(bar-active) {
   justify-content: space-between;
 }
 
-ion-content {
-  --background: #363434; /* Dunklere Hintergrundfarbe für Light Mode */
-}
 
-/* Stil für Dark Mode */
-@media (prefers-color-scheme: dark) {
-  ion-content {
-    --background: #121212; /* Dunkle Hintergrundfarbe für Dark Mode */
-  }
-}
-
-.dark-list {
-    background-color: #2a2a2a; /* This is a dark gray color */
-    color: #fff; /* This will make the text white to contrast the dark background */
-}
 
 
 </style>
