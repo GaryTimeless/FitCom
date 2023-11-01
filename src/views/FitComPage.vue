@@ -95,7 +95,7 @@ import FitProductListItem from "@/components/FitProductListItem.vue";
 import FitProductCategoryButton from "@/components/FitProductCategoryButton.vue";
 import { FitProduct } from "@/data/FitProducts";
 
-import { watch, ref, onMounted, computed } from "vue";
+import { watch, ref, onMounted, computed, Ref } from "vue";
 
 declare var gapi: any;
 
@@ -224,7 +224,10 @@ import FirmaFilter from "../components/Filter/FirmaFilter.vue";
 import ProduktkategorieFilter from "../components/Filter/ProduktkategorieFilter.vue";
 
 //TODO Dummies austauschen? Die Frage ist hier oder in der Ecxel auf nem zweiten sheet?
-const firmenListe = ref([]);
+
+
+const firmenListe: Ref<Firma[]> = ref([]);
+
 type Firma = { value: string; label: string };
 const selectedFirmenFromChild = ref<Firma[]>([]);
 
