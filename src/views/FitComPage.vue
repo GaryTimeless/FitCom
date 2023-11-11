@@ -341,7 +341,7 @@ import veganFilter from "@/components/Filter/veganFilter.vue";
 .Container {
   display: flex;
   align-items: start;
-  background-color: #363434;
+  background-color: #95999b;
 }
 .filter-wrapper {
   flex: 0 0 25%;
@@ -367,7 +367,7 @@ import veganFilter from "@/components/Filter/veganFilter.vue";
   margin-right: 10%;
   flex: 1; /* Nimmt den verbleibenden Raum ein */
   overflow-x: auto;
-  background-color: #363434;
+  background-color: #95999b;
 }
 .filter-wrapper ion-label {
   margin: 0; /* Entfernt den Margin */
