@@ -5,6 +5,7 @@
       :routerLink="'/product/' + product.name"
       :detail="false"
       style="display: flex; flex-wrap: nowrap"
+      
     >
       <ion-label class="table-cell">{{ product.firma }}</ion-label>
       <ion-label class="table-cell">{{ product.produktkategorie }}</ion-label>
@@ -41,6 +42,8 @@ var count: 1;
   text-align: center;
   /* Entfernen Sie die Hintergrundfarbe hier, da sie unten definiert wird */
 }
+
+
 
 .table-cell:last-child {
   border-right: none;

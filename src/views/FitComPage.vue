@@ -350,7 +350,7 @@ import veganFilter from "@/components/Filter/veganFilter.vue";
     25% - 60px
   ); /* Nimmt 25% der Breite minus 60px (30px auf jeder Seite) ein */
   margin: 10% 0 0 5%;
-  background-color: #363434;
+  
 }
 
 .pckLabel {
@@ -367,7 +367,20 @@ import veganFilter from "@/components/Filter/veganFilter.vue";
   margin-right: 10%;
   flex: 1; /* Nimmt den verbleibenden Raum ein */
   overflow-x: auto;
-  background-color: #95999b;
+}
+
+@media (prefers-color-scheme: dark) {
+  .Container {
+    background-color: #1e1e1e; /* Dunkle Hintergrundfarbe für Dark Mode */
+    color: #ffffff; /* Helle Schriftfarbe für Dark Mode */
+  }
+}
+
+@media (prefers-color-scheme: light), (prefers-color-scheme: no-preference) {
+  .Container{
+    background-color: #95999b; /* Helle Hintergrundfarbe für Light Mode */
+    color: #000000; /* Dunkle Schriftfarbe für bessere Lesbarkeit im Light Mode */
+  }
 }
 .filter-wrapper ion-label {
   margin: 0; /* Entfernt den Margin */
