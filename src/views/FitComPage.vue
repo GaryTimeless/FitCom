@@ -32,6 +32,7 @@
 
             <ProduktkategorieFilter
               :productKategorie="productKategorieListe"
+              :initialValue="initialSelectedKategorie"
               @SelectedProduktKategorieChange="handleSelectedProduktKategorie"
             />
 
@@ -101,8 +102,13 @@ declare var gapi: any;
 
 const products = ref<FitProduct[]>([]);
 
+type ProduktKategorieType = {
+  value: string;
+  label: string;
+};
 // Zustand für die Initialisierung von gapi
 const gapiInitialized = ref(false);
+const initialSelectedKategorie = ref<ProduktKategorieType | null>(null); // Definieren Sie es als ref<string>
 
 const route = useRoute();
 // Initialisiere gapi, wenn die Seite geladen wird
@@ -124,6 +130,9 @@ onMounted(() => {
   const queryCategory = route.query.productCategory as string | undefined;
   if (queryCategory) {
     handleSelectedProduktKategorie([queryCategory]);
+    initialSelectedKategorie.value = { value: queryCategory, label: queryCategory };
+    console.log(initialSelectedKategorie);
+    console.log("_____")
   }
 
 });
@@ -165,6 +174,13 @@ function fetchProductsFromSheet() {
 watch(gapiInitialized, (newValue) => {
   if (newValue) fetchProductsFromSheet();
 });
+
+watch(() => route.query.productCategory, (queryCategory) => {
+   if (queryCategory) {  
+     initialSelectedKategorie.value = { value: queryCategory as string, label: queryCategory as string };
+   }
+}, { immediate: true });
+
 
 // const products = ref<FitProduct[]>(getProducts());
 

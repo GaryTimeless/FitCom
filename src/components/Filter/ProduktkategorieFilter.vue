@@ -2,6 +2,7 @@
     <ion-list>
       <ion-item>
         <ion-select
+          v-model="selectedValues"
           aria-label="ProduktKategorie"
           placeholder="Wähle Produkt Kategorie aus"
           @ionChange="handleChange"
@@ -19,7 +20,7 @@
 
   <script lang="ts">
 import { IonItem, IonList, IonSelect, IonSelectOption } from '@ionic/vue';
-import { Ref, defineComponent, ref } from 'vue';
+import { PropType, Ref, defineComponent, ref } from 'vue';
 
 
 type ProduktKategorieType = {
@@ -34,10 +35,16 @@ export default defineComponent({
       type: Array as () => ProduktKategorieType[],
         required: true,
       },
+      initialValue: {
+      type: Object as PropType<ProduktKategorieType>,
+      default: () => ({ value: '', label: '' }),
+    },
     },
     data() {
+      console.log("Initial Value:", this.initialValue); // Zeigt den initialen Wert in der Konsole an
+
       return {
-        selectedValues: [] as string[], // Hier wird ein leeres Array für die ausgewählten Werte initialisiert
+        selectedValues: this.initialValue ? [this.initialValue.value] : [],
     };
   },
   methods: {
