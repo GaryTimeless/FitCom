@@ -4,7 +4,7 @@ export interface FitProduct {
   produktkategorie: string;
   name: string;
   vegan: string;
-  preisPerPackung: number;
+  preisPerPackung: string;
   preisPerKG: number;
   portionierung: number;
   portionenPerPkg: number;

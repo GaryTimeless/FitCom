@@ -107,6 +107,7 @@ defineProps({
 
 const emit = defineEmits();
 const handleButtonClick = (sortKey: string) => {
+  console.log(sortKey)
   // Ihr Code, der ausgeführt werden soll, wenn der Button geklickt wird
   emit("sort", sortKey);
 };

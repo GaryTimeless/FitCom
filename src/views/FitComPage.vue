@@ -168,6 +168,7 @@ const refresh = (ev: CustomEvent) => {
   }, 3000);
 };
 
+//TODO Test entfernen?
 const Test = (selectedFirma: string[]) => {
   // Hier erhältst du die ausgewählten Firmen von der Kindkomponente
   console.log(
@@ -179,6 +180,8 @@ const Test = (selectedFirma: string[]) => {
 };
 
 const sortProducts = (key: string) => {
+  console.log(key+"next")
+
   if (key === "Firma") {
     products.value.sort((a, b) => a.firma.localeCompare(b.firma));
   }
@@ -188,7 +191,15 @@ const sortProducts = (key: string) => {
     );
   }
   if (key === "Preis/Pkg") {
-    products.value.sort((a, b) => a.preisPerPackung - b.preisPerPackung);
+    
+    //products.value.sort((a, b) => a.preisPerKG - b.preisPerKG);
+    products.value.sort((a, b) => {
+      const numA = parseFloat(a.preisPerPackung);
+      const numB = parseFloat(b.preisPerPackung);
+      return numA - numB ;
+    });
+
+
     console.log(products);
   }
   if (key === "PreisProKG") {
@@ -211,13 +222,19 @@ const sortProducts = (key: string) => {
       return numA - numB ;
     });
   }
-  if (key === "vegan") {
+  if (key === "Vegan") {
     products.value.sort((a, b) => {
-      if (a.vegan === "yes" && b.vegan === "no") return -1;
-      if (a.vegan === "no" && b.vegan === "yes") return 1;
-      return 0;
+        if (a.vegan === "yes" && b.vegan !== "yes") return -1; // "yes" kommt zuerst
+        if (b.vegan === "yes" && a.vegan !== "yes") return 1;  // "yes" kommt zuerst
+
+        if (a.vegan === "no" && b.vegan === "no Info") return -1; // "no" vor "no info"
+        if (a.vegan === "no Info" && b.vegan === "no") return 1;  // "no" vor "no info"
+
+        return 0; // Standardrückgabe, falls keine anderen Bedingungen zutreffen
     });
-  }
+}
+
+
 };
 
 const isVegan = ref(false);
@@ -314,6 +331,7 @@ const productKategorieListe = ref([
   { value: "Protein", label: "Protein" },
   { value: "Creatine", label: "Kreatine" },
   // TODO weitere Optionen
+  //TODO überflüssig geworden?
 ]);
 
 import PriceRangeFilter from "../components/Filter/PriceRangeFilter.vue";
