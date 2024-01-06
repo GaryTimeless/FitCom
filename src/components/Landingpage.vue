@@ -39,7 +39,7 @@ import { defineComponent, ref, computed } from 'vue';
       const products = ref<Product[]>([
         { id: 1, name: 'Protein' },
         { id: 2, name: 'Clear Whey' },
-        { id: 3, name: 'Kreatin' },
+        { id: 3, name: 'Creatine' },
         // Fügen Sie hier weitere Produkte hinzu
       ]);
       
