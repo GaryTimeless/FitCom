@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import FitComPage from '../views/FitComPage.vue'
+import LandingpageVue from '@/components/Landingpage.vue';
 import { Component } from 'ionicons/dist/types/stencil-public-runtime';
 
 const routes: Array<RouteRecordRaw> = [
@@ -8,6 +9,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'FitCom',
     component:FitComPage
+  },
+  {
+    path:'/landing',
+    name: 'Landingpage',
+    component:LandingpageVue
   },
   {
     path: '/:catchAll(.*)', redirect:'/'

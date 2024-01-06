@@ -104,6 +104,7 @@ const products = ref<FitProduct[]>([]);
 // Zustand für die Initialisierung von gapi
 const gapiInitialized = ref(false);
 
+const route = useRoute();
 // Initialisiere gapi, wenn die Seite geladen wird
 onMounted(() => {
   if (typeof gapi !== "undefined") {
@@ -120,6 +121,11 @@ onMounted(() => {
         });
     });
   }
+  const queryCategory = route.query.productCategory as string | undefined;
+  if (queryCategory) {
+    handleSelectedProduktKategorie([queryCategory]);
+  }
+
 });
 
 function fetchProductsFromSheet() {
@@ -348,6 +354,7 @@ const handleVeganChange = (value: any) => {
 const isCheckedref = ref(false);
 
 import veganFilter from "@/components/Filter/veganFilter.vue";
+import { useRoute } from "vue-router";
 // const selectedIsVeganFromChild = ref<boolean>(false);
 
 // console.log("Übertrag hat geklappt. "+isChecked.value + typeof isChecked)
