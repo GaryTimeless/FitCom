@@ -52,8 +52,8 @@ export default defineComponent({
     align-items: center;
     justify-content: center;
 
-    background: #0b7506;
-    color: #fff;
+    background: #52E1F7;
+    color: #000000;
 
     border-radius: 50%;
     transform: scale(1.01);
@@ -70,11 +70,11 @@ export default defineComponent({
   }
 
   ion-range::part(knob) {
-    background: #026d0d;
+    background: #52E1F7;
   }
 
   ion-range::part(bar) {
-    background: #0b3f01;
+    background: #52E1F7;
   }
 
   ion-range::part(bar-active) {

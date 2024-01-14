@@ -5,7 +5,7 @@
       <ion-button
         @click="handleButtonClick('Firma')"
         fill="clear"
-        style="color: antiquewhite"
+        style="color: black"
         class="table-button"
       >
         <ion-icon :icon="swapVerticalOutline" style="margin-right: 8px">
@@ -17,7 +17,7 @@
       <ion-button
         @click="handleButtonClick('Kategorie')"
         fill="clear"
-        style="color: antiquewhite"
+        style="color: black"
         class="table-button"
       >
         <ion-icon :icon="swapVerticalOutline" style="margin-right: 8px">
@@ -29,7 +29,7 @@
       <ion-button
         @click="handleButtonClick('Produktname')"
         fill="clear"
-        style="color: antiquewhite"
+        style="color: black"
         class="table-button"
       >
         <ion-icon :icon="swapVerticalOutline" style="margin-right: 8px">
@@ -40,7 +40,7 @@
       <ion-button
         @click="handleButtonClick('Preis/Pkg')"
         fill="clear"
-        style="color: antiquewhite"
+        style="color: black"
         class="table-button"
       >
         <ion-icon :icon="swapVerticalOutline" style="margin-right: 8px">
@@ -51,7 +51,7 @@
       <ion-button
         @click="handleButtonClick('PreisProKG')"
         fill="clear"
-        style="color: antiquewhite"
+        style="color: black"
         class="table-button"
       >
         <ion-icon :icon="swapVerticalOutline" style="margin-right: 8px">
@@ -62,7 +62,7 @@
       <ion-button
         @click="handleButtonClick('PortionenPerPkg')"
         fill="clear"
-        style="color: antiquewhite"
+        style="color: black"
         class="table-button"
       >
         <ion-icon :icon="swapVerticalOutline" style="margin-right: 8px">
@@ -74,7 +74,7 @@
       <ion-button
         @click="handleButtonClick('GewichtPerPkg')"
         fill="clear"
-        style="color: antiquewhite"
+        style="color: black"
         class="table-button"
       >
         <ion-icon :icon="swapVerticalOutline" style="margin-right: 8px">
@@ -86,7 +86,7 @@
       <ion-button
         @click="handleButtonClick('Vegan')"
         fill="clear"
-        style="color: antiquewhite"
+        style="color: black"
         class="table-button"
       >
         <ion-icon :icon="swapVerticalOutline" style="margin-right: 8px">
@@ -122,7 +122,7 @@ var count: 1;
 <style scoped>
 .table-button {
   border-right: 1px solid #e5e5e5;
-  background-color: rgb(115, 115, 26);
+  background-color: #52E1F7;
   padding: 10px;
   min-width: 200px;
   text-align: center;

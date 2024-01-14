@@ -2,7 +2,8 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Comparison of fitness products by G.Schenk 2</ion-title>
+        <ion-title style="text-align: center; width: 100%;">Wheyle</ion-title>
+        <ion-title style="text-align: center; width: 100%;">Die intelligente Wa(h)l für deine Supplimente</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -16,12 +17,20 @@
           <ion-title size="large">Inbox</ion-title>
         </ion-toolbar>
       </ion-header>
-
+       <!-- Bilder Sektion -->
+       <div class="image-section">
+        <div class="image-stack">
+          <img src="../img/logo.png" alt="Bildbeschreibung 1" class="bottom-image">
+          
+        </div>
+      </div>
+      <!-- Filter & Liste Sektion -->
       <div class="Container">
+       
+
         <!-- List of all Filter-->
-        <!-- TODO alle filter als einzelne Componenten schreiben.-->
         <div class="filter-wrapper">
-          <ion-list >
+          <ion-list>
             <!-- Firma Filter - 
               :firmen wird eine Lise von Firmen mitgegeben
               @update -->
@@ -130,11 +139,13 @@ onMounted(() => {
   const queryCategory = route.query.productCategory as string | undefined;
   if (queryCategory) {
     handleSelectedProduktKategorie([queryCategory]);
-    initialSelectedKategorie.value = { value: queryCategory, label: queryCategory };
+    initialSelectedKategorie.value = {
+      value: queryCategory,
+      label: queryCategory,
+    };
     console.log(initialSelectedKategorie);
-    console.log("_____")
+    console.log("_____");
   }
-
 });
 
 function fetchProductsFromSheet() {
@@ -159,14 +170,23 @@ function fetchProductsFromSheet() {
         gewichtPerPkg: row[10],
       }));
 
-      const uniqueFirmen = [...new Set(products.value.map(product => product.firma))];
-      const uniqueProduktKategorien = [...new Set(products.value.map(product => product.produktkategorie))];
+      const uniqueFirmen = [
+        ...new Set(products.value.map((product) => product.firma)),
+      ];
+      const uniqueProduktKategorien = [
+        ...new Set(products.value.map((product) => product.produktkategorie)),
+      ];
 
       // Aktualisiere firmenListe
-      firmenListe.value = uniqueFirmen.map(firma => ({ value: firma, label: firma }));
+      firmenListe.value = uniqueFirmen.map((firma) => ({
+        value: firma,
+        label: firma,
+      }));
 
       // Aktualisiere productKategorieListe
-      productKategorieListe.value = uniqueProduktKategorien.map(kategorie => ({ value: kategorie, label: kategorie }));
+      productKategorieListe.value = uniqueProduktKategorien.map(
+        (kategorie) => ({ value: kategorie, label: kategorie })
+      );
     });
 }
 
@@ -175,12 +195,18 @@ watch(gapiInitialized, (newValue) => {
   if (newValue) fetchProductsFromSheet();
 });
 
-watch(() => route.query.productCategory, (queryCategory) => {
-   if (queryCategory) {  
-     initialSelectedKategorie.value = { value: queryCategory as string, label: queryCategory as string };
-   }
-}, { immediate: true });
-
+watch(
+  () => route.query.productCategory,
+  (queryCategory) => {
+    if (queryCategory) {
+      initialSelectedKategorie.value = {
+        value: queryCategory as string,
+        label: queryCategory as string,
+      };
+    }
+  },
+  { immediate: true }
+);
 
 // const products = ref<FitProduct[]>(getProducts());
 
@@ -202,7 +228,7 @@ const Test = (selectedFirma: string[]) => {
 };
 
 const sortProducts = (key: string) => {
-  console.log(key+"next")
+  console.log(key + "next");
 
   if (key === "Firma") {
     products.value.sort((a, b) => a.firma.localeCompare(b.firma));
@@ -213,14 +239,12 @@ const sortProducts = (key: string) => {
     );
   }
   if (key === "Preis/Pkg") {
-    
     //products.value.sort((a, b) => a.preisPerKG - b.preisPerKG);
     products.value.sort((a, b) => {
       const numA = parseFloat(a.preisPerPackung);
       const numB = parseFloat(b.preisPerPackung);
-      return numA - numB ;
+      return numA - numB;
     });
-
 
     console.log(products);
   }
@@ -241,22 +265,20 @@ const sortProducts = (key: string) => {
     products.value.sort((a, b) => {
       const numA = parseFloat(a.gewichtPerPkg);
       const numB = parseFloat(b.gewichtPerPkg);
-      return numA - numB ;
+      return numA - numB;
     });
   }
   if (key === "Vegan") {
     products.value.sort((a, b) => {
-        if (a.vegan === "yes" && b.vegan !== "yes") return -1; // "yes" kommt zuerst
-        if (b.vegan === "yes" && a.vegan !== "yes") return 1;  // "yes" kommt zuerst
+      if (a.vegan === "yes" && b.vegan !== "yes") return -1; // "yes" kommt zuerst
+      if (b.vegan === "yes" && a.vegan !== "yes") return 1; // "yes" kommt zuerst
 
-        if (a.vegan === "no" && b.vegan === "no Info") return -1; // "no" vor "no info"
-        if (a.vegan === "no Info" && b.vegan === "no") return 1;  // "no" vor "no info"
+      if (a.vegan === "no" && b.vegan === "no Info") return -1; // "no" vor "no info"
+      if (a.vegan === "no Info" && b.vegan === "no") return 1; // "no" vor "no info"
 
-        return 0; // Standardrückgabe, falls keine anderen Bedingungen zutreffen
+      return 0; // Standardrückgabe, falls keine anderen Bedingungen zutreffen
     });
-}
-
-
+  }
 };
 
 const isVegan = ref(false);
@@ -267,7 +289,6 @@ import FirmaFilter from "../components/Filter/FirmaFilter.vue";
 import ProduktkategorieFilter from "../components/Filter/ProduktkategorieFilter.vue";
 
 //TODO Dummies austauschen? Die Frage ist hier oder in der Ecxel auf nem zweiten sheet?
-
 
 const firmenListe: Ref<Firma[]> = ref([]);
 
@@ -379,10 +400,36 @@ import { useRoute } from "vue-router";
 </script>
 
 <style scoped>
+
+.image-section {
+  text-align: center; /* Zentriert die Bilder */
+  position: relative; /* Position relativ für das Bild-Stacking */
+  margin-bottom: 20px; /* Abstand zwischen den Bildern und dem Filter-Container */
+}
+
+.image-stack {
+  display: inline-block; /* Damit der Container nur so breit wie die Bilder ist */
+  position: relative;
+}
+
+.bottom-image, .top-image {
+  /* position: absolute; */
+  top: 0;
+  left: 50%; 
+  /* Zentriert die Bilder horizontal */
+/* transform: translateX(-50%);  */
+/* Korrigiert die Zentrierung unter Berücksichtigung der Bildbreite */
+}
+
+.top-image {
+z-index: 1; /* Stellt sicher, dass das Bild oben liegt */
+}
+
+
 .Container {
   display: flex;
   align-items: start;
-  background-color: #95999b;
+  background-color: #fff;
 }
 .filter-wrapper {
   flex: 0 0 25%;
@@ -390,8 +437,7 @@ import { useRoute } from "vue-router";
   flex-basis: calc(
     25% - 60px
   ); /* Nimmt 25% der Breite minus 60px (30px auf jeder Seite) ein */
-  margin: 10% 0 0 5%;
-  
+  margin: 0% 0 0 5%;
 }
 
 .pckLabel {
@@ -404,7 +450,7 @@ import { useRoute } from "vue-router";
   overflow-x: auto;
   flex-wrap: nowrap;
   /* margin-left: 25%; */
-  margin-top: 10%;
+  margin-top: 0%;
   margin-right: 10%;
   flex: 1; /* Nimmt den verbleibenden Raum ein */
   overflow-x: auto;
@@ -418,8 +464,8 @@ import { useRoute } from "vue-router";
 }
 
 @media (prefers-color-scheme: light), (prefers-color-scheme: no-preference) {
-  .Container{
-    background-color: #95999b; /* Helle Hintergrundfarbe für Light Mode */
+  .Container {
+    background-color: #fff; /* Helle Hintergrundfarbe für Light Mode */
     color: #000000; /* Dunkle Schriftfarbe für bessere Lesbarkeit im Light Mode */
   }
 }
@@ -475,8 +521,4 @@ ion-range::part(bar-active) {
   display: flex;
   justify-content: space-between;
 }
-
-
-
-
 </style>

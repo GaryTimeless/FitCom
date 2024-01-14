@@ -6,10 +6,16 @@
         <h1>Fitness-Vergleich</h1>
       </div>
 
-      <div class="search-section">
+      <!-- <div class="search-section">
         <input type="text" v-model="searchTerm" placeholder="Suche" @input="filterProducts">
-      </div>
+      </div> -->
       
+      <div class="image-section">
+        <div class="image-stack">
+          <img src="../img/logo.png" alt="Bildbeschreibung 1" class="bottom-image">
+          
+        </div>
+      </div>
       <div class="products-section">
         <button
           class="product-button"
@@ -105,7 +111,7 @@ import { defineComponent, ref, computed } from 'vue';
   font-size: 16px; /* Oder die gewünschte Schriftgröße */
   margin: 5px; /* Abstand zwischen den Buttons */
   border: 1px solid #ccc; /* Rahmen um den Button */
-  background-color: #128a05; /* Hintergrundfarbe */
+  background-color: #52E1F7; /* Hintergrundfarbe */
   cursor: pointer; /* Zeiger, um anzuzeigen, dass der Button klickbar ist */
   /* Weitere Stile wie Schriftart, Rundung der Ecken etc. */
   border-radius: 5px; /* Rundung der Ecken */
