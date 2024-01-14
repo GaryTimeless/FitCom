@@ -6,12 +6,12 @@ import { Component } from 'ionicons/dist/types/stencil-public-runtime';
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
+    path: '/table',
     name: 'FitCom',
     component:FitComPage
   },
   {
-    path:'/landing',
+    path:'/',
     name: 'Landingpage',
     component:LandingpageVue
   },
