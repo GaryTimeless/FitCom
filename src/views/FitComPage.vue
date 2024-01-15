@@ -3,7 +3,7 @@
     <ion-header :translucent="true">
       <ion-toolbar>
         <ion-title style="text-align: center; width: 100%;">Wheyle</ion-title>
-        <ion-title style="text-align: center; width: 100%;">Die intelligente Wa(h)l für deine Supplimente</ion-title>
+        <ion-title style="text-align: center; width: 100%;">Die intelligente Wa(h)l für deine supplements</ion-title>
       </ion-toolbar>
     </ion-header>
 
