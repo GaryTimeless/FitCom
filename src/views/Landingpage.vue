@@ -60,8 +60,8 @@ import { defineComponent, ref, computed } from 'vue';
         console.log('Produkt ausgewählt:', product.name);
         // Fügen Sie hier die Navigation zur Detailseite hinzu, falls benötigt
         // router.push({ name: 'FitCom' });
-        // router.push({ name: 'FitCom', query: { productCategory: product.name } });
-        router.push({ name: 'FitCom' });
+        router.push({ name: 'FitCom', query: { productCategory: product.name } });
+        
 
       };
   
