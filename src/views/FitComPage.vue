@@ -31,9 +31,7 @@
         <!-- List of all Filter-->
         <div class="filter-wrapper">
           <ion-list>
-            <!-- Firma Filter - 
-              :firmen wird eine Lise von Firmen mitgegeben
-              @update -->
+            <!-- Firma Filter -->
             <FirmaFilter
               :firmen="firmenListe"
               @SelectedFirmaChange="handleSelectedFirmen"
@@ -521,4 +519,4 @@ ion-range::part(bar-active) {
   display: flex;
   justify-content: space-between;
 }
-</style>
+</style> -->

@@ -6,9 +6,6 @@
         <h1>Fitness-Vergleich</h1>
       </div>
 
-      <!-- <div class="search-section">
-        <input type="text" v-model="searchTerm" placeholder="Suche" @input="filterProducts">
-      </div> -->
       
       <div class="image-section">
         <div class="image-stack">
@@ -63,15 +60,14 @@ import { defineComponent, ref, computed } from 'vue';
         console.log('Produkt ausgewählt:', product.name);
         // Fügen Sie hier die Navigation zur Detailseite hinzu, falls benötigt
         // router.push({ name: 'FitCom' });
-        router.push({ name: 'FitCom', query: { productCategory: product.name } });
+        // router.push({ name: 'FitCom', query: { productCategory: product.name } });
+        router.push({ name: 'FitCom' });
 
       };
   
-      const filterProducts = () => {
-        // Diese Methode könnte leer bleiben, da computed bereits die Filterung übernimmt
-      };
+     
   
-      return { searchTerm, filteredProducts, selectProduct, filterProducts };
+      return { searchTerm, filteredProducts, selectProduct, };
     },
   });
   </script>

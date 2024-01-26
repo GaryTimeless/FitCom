@@ -41,7 +41,12 @@ var count: 1;
   min-width: 200px;
   text-align: center;
   /* Entfernen Sie die Hintergrundfarbe hier, da sie unten definiert wird */
+  white-space: nowrap;    /* Verhindert, dass der Inhalt in neue Zeilen umbricht */
+  overflow: hidden;       /* Verhindert das Überlaufen des Inhalts */
+  text-overflow: ellipsis; /* Fügt "..." hinzu, wenn der Text abgeschnitten wird */
+  display: inline-block;
 }
+
 
 
 
@@ -62,6 +67,7 @@ var count: 1;
   .table-cell {
     background-color: rgb(48, 48, 24); /* Dunkle Hintergrundfarbe für Dark Mode */
     color: #ffffff; /* Helle Schriftfarbe für Dark Mode */
+    
   }
 }
 </style>
