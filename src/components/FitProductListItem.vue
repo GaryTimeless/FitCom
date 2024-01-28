@@ -1,12 +1,9 @@
 <template>
   <div>
-    <ion-item
-      v-if="product"
-      :routerLink="'/product/' + product.name"
-      :detail="false"
-      style="display: flex; flex-wrap: nowrap"
-      
-    >
+    <ion-list>
+      <ion-item-group>
+    <ion-item>
+    <div class="lable-wrapper">
       <ion-label class="table-cell">{{ product.firma }}</ion-label>
       <ion-label class="table-cell">{{ product.produktkategorie }}</ion-label>
       <ion-label class="table-cell">{{ product.name }}</ion-label>
@@ -15,12 +12,15 @@
       <ion-label class="table-cell">{{ product.portionenPerPkg }}</ion-label>
       <ion-label class="table-cell">{{ product.gewichtPerPkg }} g </ion-label>
       <ion-label class="table-cell">{{ product.vegan }}</ion-label>
+    </div>
     </ion-item>
+  </ion-item-group>
+  </ion-list>
   </div>
 </template>
 
 <script setup lang="ts">
-import { IonIcon, IonItem, IonLabel, IonNote } from "@ionic/vue";
+import { IonIcon, IonItem, IonItemGroup, IonLabel, IonNote } from "@ionic/vue";
 import { chevronForward } from "ionicons/icons";
 
 defineProps({
@@ -35,6 +35,11 @@ var count: 1;
 </script>
 
 <style scoped>
+.lable-wrapper{
+  display: flex;
+  flex-wrap: nowrap;
+
+}
 .table-cell {
   border-right: 1px solid #e5e5e5;
   padding: 10px;
@@ -45,6 +50,7 @@ var count: 1;
   overflow: hidden;       /* Verhindert das Überlaufen des Inhalts */
   text-overflow: ellipsis; /* Fügt "..." hinzu, wenn der Text abgeschnitten wird */
   display: inline-block;
+  flex-wrap: nowrap !important;
 }
 
 

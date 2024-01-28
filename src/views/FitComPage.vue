@@ -54,11 +54,12 @@
 
         <!-- List of all Products-->
         <div class="list-wrapper">
-          <ion-list class="dark-list">
+          <ion-list>
             <FitProductCategoryButton
               @sort="sortProducts"
             ></FitProductCategoryButton>
             <FitProductListItem
+            class="FPLI-flexControll"
               v-for="product in filteredProducts"
               :key="product.id"
               :product="product"
@@ -447,7 +448,6 @@ z-index: 1; /* Stellt sicher, dass das Bild oben liegt */
   display: flex;
   overflow-x: auto;
   flex-wrap: nowrap;
-  /* margin-left: 25%; */
   margin-top: 0%;
   margin-right: 10%;
   flex: 1; /* Nimmt den verbleibenden Raum ein */
@@ -514,9 +514,8 @@ ion-range::part(bar) {
 ion-range::part(bar-active) {
   background: #bde0fe;
 }
-
-.price-range {
+.FPLI-flexControll{
   display: flex;
-  justify-content: space-between;
+  flex-wrap: nowrap;
 }
 </style> -->
