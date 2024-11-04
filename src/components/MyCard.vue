@@ -6,19 +6,29 @@
       <ion-card-subtitle class="product-name">{{ name }}</ion-card-subtitle>
     </ion-card-header>
 
+    <!-- Verwendung von ion-grid, um Inhalt und Preis besser zu strukturieren -->
     <ion-card-content>
-      {{ content }}
+      <ion-grid>
+        <ion-row>
+          <ion-col size="9" class="content-text">
+            {{ content }}
+          </ion-col>
+          <ion-col size="3" class="price-column" text-right>
+            <div class="price" v-if="price">{{ price }} €</div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-card-content>
   </ion-card>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonImg } from '@ionic/vue';
+import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonImg, IonGrid, IonRow, IonCol } from '@ionic/vue';
 
 export default defineComponent({
   name: 'MyCard',
-  components: { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonImg },
+  components: { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonImg, IonGrid, IonRow, IonCol },
   props: {
     firma: {
       type: String,
@@ -34,6 +44,10 @@ export default defineComponent({
     },
     imageSrc: {
       type: String,
+      default: ''
+    },
+    price: {
+      type: [String, Number],
       default: ''
     }
   }
@@ -59,6 +73,27 @@ ion-img {
   height: auto;
   object-fit: cover;
   border-radius: 8px 8px 0 0;
+}
+
+/* Stil für das Content-Grid */
+.content-text {
+  font-size: 1em;
+  color: #666;
+  text-align: justify;
+}
+
+/* Stil für die Preis-Spalte */
+.price-column {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.price {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #f0f0f0;
+  opacity: 0.8;
 }
 
 /* Responsive Design für die Card */

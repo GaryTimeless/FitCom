@@ -16,23 +16,27 @@
         </p>
       </div>
       <h1 style="text-align: center;">Protein</h1>
+      <p style="text-align: center;">Preis ist in € / 1g Protein pro Portion</p>
 
       <MyCard
         name="Designer Protein whey"
         firma="ESN"
-        content="High quality whey protein for your muscles."
+        content="High quality whey protein for your muscles.High quality whey protein for your muscles.High quality whey protein for your muscles.High quality whey protein for your muscles."
         imageSrc="src/img/ProteinExample.jpg"
+        price="0,03"
         style="margin-bottom: 20px"
       />
       <MyCard
         name="Vegan Whey"
         firma="DM"
         content="really nice and tasty product for every day"
+        price="0,04"
       />
       <MyCard
         name="Vegan Whey Pro"
         firma="bulk"
         content="for athlete sports persons"
+        price="0,05"
       />
       <ion-footer>
         <p>&copy; 2024 FitCom. All rights reserved.</p>
