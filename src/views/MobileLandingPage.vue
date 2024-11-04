@@ -21,7 +21,7 @@
       <MyCard
         name="Designer Protein whey"
         firma="ESN"
-        content="High quality whey protein for your muscles.High quality whey protein for your muscles.High quality whey protein for your muscles.High quality whey protein for your muscles."
+        content="High quality whey protein for your muscles.High quality whey protein for your muscles. High quality and tatsy whey protein for your muscles. This is High quality whey protein for your muscles."
         imageSrc="src/img/ProteinExample.jpg"
         price="0,03"
         style="margin-bottom: 20px"

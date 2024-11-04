@@ -6,29 +6,25 @@
       <ion-card-subtitle class="product-name">{{ name }}</ion-card-subtitle>
     </ion-card-header>
 
-    <!-- Verwendung von ion-grid, um Inhalt und Preis besser zu strukturieren -->
+    <!-- Entfernt das ion-grid und verwendet stattdessen eine content-container-Div -->
     <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col size="9" class="content-text">
-            {{ content }}
-          </ion-col>
-          <ion-col size="3" class="price-column" text-right>
-            <div class="price" v-if="price">{{ price }} €</div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      <div class="content-container">
+        <div class="content-text">
+          {{ content }}
+        </div>
+        <div class="price" v-if="price">{{ price }} €</div>
+      </div>
     </ion-card-content>
   </ion-card>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonImg, IonGrid, IonRow, IonCol } from '@ionic/vue';
+import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonImg } from '@ionic/vue';
 
 export default defineComponent({
   name: 'MyCard',
-  components: { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonImg, IonGrid, IonRow, IonCol },
+  components: { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonImg },
   props: {
     firma: {
       type: String,
@@ -55,6 +51,12 @@ export default defineComponent({
 </script>
 
 <style scoped>
+/* Stil für den Firmennamen *//* Stil für das ion-card-content, um unerwünschtes Padding zu entfernen */
+ion-card-content {
+  padding-left: 16px; /* Gleicher linker Abstand wie der Produktname */
+  padding-right: 16px; /* Gleicher rechter Abstand */
+}
+
 /* Stil für den Firmennamen */
 .company-name {
   font-size: 0.9em;
@@ -75,44 +77,46 @@ ion-img {
   border-radius: 8px 8px 0 0;
 }
 
-/* Stil für das Content-Grid */
+/* Blocksatz für den Text */
+.content-container {
+  padding-bottom: 20px; /* Platz für den Preis am unteren Rand */
+  position: relative;
+}
+
 .content-text {
   font-size: 1em;
   color: #666;
   text-align: justify;
+  margin-bottom: 20px; /* Abstand zum Preis */
+  width: 80%;
 }
 
 /* Stil für die Preis-Spalte */
-.price-column {
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-}
-
 .price {
-  font-size: 1.1em;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 1.2em;
   font-weight: bold;
-  color: #f0f0f0;
-  opacity: 0.8;
+  color: #e0e0e0; /* Heller für bessere Sichtbarkeit */
+  opacity: 0.9;
 }
 
 /* Responsive Design für die Card */
 .responsive-card {
-  width: 100%; /* Standard für mobile Bildschirme */
-  max-width: 600px; /* Maximale Breite auf größeren Bildschirmen */
-  margin: auto; /* Zentriert die Karte auf dem Bildschirm */
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
   margin-bottom: 5px;
 }
 
 @media (min-width: 768px) {
-  /* Ab Tablet-Breite wird die Karte schmaler dargestellt */
   .responsive-card {
     width: 80%;
   }
 }
 
 @media (min-width: 1024px) {
-  /* Ab Desktop-Breite wird die Karte weiter begrenzt */
   .responsive-card {
     width: 60%;
   }
