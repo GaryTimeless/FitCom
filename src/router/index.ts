@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import FitComPage from '../views/FitComPage.vue'
 import LandingpageVue from '@/views/Landingpage.vue';
+import MobileLandingPage from '@/views/MobileLandingPage.vue';
+
 import { Component } from 'ionicons/dist/types/stencil-public-runtime';
 
 const routes: Array<RouteRecordRaw> = [
@@ -12,6 +14,11 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path:'/',
+    name: 'MobileLandingPage',
+    component:MobileLandingPage
+  },
+  {
+    path:'/OldLandingPage',
     name: 'Landingpage',
     component:LandingpageVue
   },
