@@ -1,9 +1,9 @@
 <template>
-  <ion-card>
+  <ion-card class="responsive-card">
     <ion-img v-if="imageSrc" :src="imageSrc" alt="Card Image"></ion-img>
     <ion-card-header>
-      <ion-card-subtitle class="manufacturer">{{ subtitle }}</ion-card-subtitle>
-      <ion-card-title class="product-name">{{ title }}</ion-card-title>
+      <ion-card-title class="company-name">{{ firma }}</ion-card-title>
+      <ion-card-subtitle class="product-name">{{ name }}</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
@@ -20,13 +20,13 @@ export default defineComponent({
   name: 'MyCard',
   components: { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonImg },
   props: {
-    title: {
+    firma: {
+      type: String,
+      default: 'Default Company Name'
+    },
+    name: {
       type: String,
       default: 'Default Product Name'
-    },
-    subtitle: {
-      type: String,
-      default: 'Default Manufacturer'
     },
     content: {
       type: String,
@@ -34,15 +34,15 @@ export default defineComponent({
     },
     imageSrc: {
       type: String,
-      default: '' // Leerer Standardwert, falls kein Bild angegeben ist
+      default: ''
     }
   }
 });
 </script>
 
 <style scoped>
-/* Stil für den Herstellernamen */
-.manufacturer {
+/* Stil für den Firmennamen */
+.company-name {
   font-size: 0.9em;
   color: gray;
 }
@@ -59,5 +59,27 @@ ion-img {
   height: auto;
   object-fit: cover;
   border-radius: 8px 8px 0 0;
+}
+
+/* Responsive Design für die Card */
+.responsive-card {
+  width: 100%; /* Standard für mobile Bildschirme */
+  max-width: 600px; /* Maximale Breite auf größeren Bildschirmen */
+  margin: auto; /* Zentriert die Karte auf dem Bildschirm */
+  margin-bottom: 5px;
+}
+
+@media (min-width: 768px) {
+  /* Ab Tablet-Breite wird die Karte schmaler dargestellt */
+  .responsive-card {
+    width: 80%;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Ab Desktop-Breite wird die Karte weiter begrenzt */
+  .responsive-card {
+    width: 60%;
+  }
 }
 </style>
