@@ -12,8 +12,18 @@
         <div class="content-text">
           {{ content }}
         </div>
-        <div class="price" v-if="price">{{ price }} €</div>
+        <div class="price" v-if="price"> {{ price }} €</div>
       </div>
+      <ion-accordion-group >
+          <ion-accordion >
+            <ion-item slot="header" color="light">
+              <ion-label>Mehr Details</ion-label>
+            </ion-item>
+            <div slot="content">
+              {{ moreInfoAcc }}
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
     </ion-card-content>
   </ion-card>
 </template>
@@ -45,7 +55,12 @@ export default defineComponent({
     price: {
       type: [String, Number],
       default: ''
+    },
+    moreInfoAcc:{
+      type: String,
+      default: ''
     }
+
   }
 });
 </script>
