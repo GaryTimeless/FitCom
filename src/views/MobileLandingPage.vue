@@ -22,17 +22,26 @@
       <MyCard
         name="Designer Protein whey"
         firma="ESN"
-        content="High quality whey protein for your muscles.High quality whey protein for your muscles. High quality and tasty whey protein for your muscles. This is High quality whey protein for your muscles."
+        content="High quality whey protein for your muscles."
         imageSrc="src/img/ProteinExample.jpg"
         price="0,03"
-        style="margin-bottom: 20px"
-        :moreInfoAcc="[
-          { label: 'Kcal', value: '300' },
-          { label: 'Kohlenhydrate', value: '20g' },
-          { label: 'Zucker', value: '2g' },
-          { label: 'Eiweiß', value: '80g' },
-          { label: 'Fett', value: '0,1g' },
-        ]"
+        :moreInfoAcc="{
+          '100g': [
+            { label: 'Kcal', value: '300' },
+            { label: 'Kohlenhydrate', value: '20g' },
+            { label: 'Zucker', value: '2g' },
+            { label: 'Eiweiß', value: '80g' },
+            { label: 'Fett', value: '0,1g' },
+          ],
+          portion: [
+            { label: 'Kcal', value: '150' },
+            { label: 'Kohlenhydrate', value: '10g' },
+            { label: 'Zucker', value: '1g' },
+            { label: 'Eiweiß', value: '40g' },
+            { label: 'Fett', value: '0,05g' },
+          ],
+          portionSize: '40g',
+        }"
       />
       <MyCard
         name="Vegan Whey"

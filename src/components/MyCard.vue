@@ -20,9 +20,30 @@
             <ion-label>Mehr Details</ion-label>
           </ion-item>
           <div slot="content">
+            <!-- Segment to toggle between "pro 100g" and "pro Portion" -->
+            <ion-segment v-model="selectedSegment" value="100g">
+              <ion-segment-button value="100g">
+                <ion-label>Pro 100g</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="portion">
+                <ion-label>Pro Portion </ion-label>
+              </ion-segment-button>
+            </ion-segment>
+
+            <p class="nutritional-header">
+              Nährwerte
+              {{
+                selectedSegment === "100g"
+                  ? "pro 100g"
+                  : `pro Portion (${portionSize.value})`
+              }}
+            </p>
+
             <table class="product-details-table">
-              <p style="margin: 5px 5px 5px 5px;">Nährwerte pro 100g</p>
-              <tr v-for="(detail, index) in moreInfoAcc" :key="index">
+              <tr
+                v-for="(detail, index) in displayedNutritionalValues"
+                :key="index"
+              >
                 <td>{{ detail.label }}:</td>
                 <td>{{ detail.value }}</td>
               </tr>
@@ -35,7 +56,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, ref, computed } from "vue";
 import {
   IonCard,
   IonCardContent,
@@ -46,8 +67,10 @@ import {
   IonAccordion,
   IonItem,
   IonLabel,
-  IonAccordionGroup
-} from '@ionic/vue';
+  IonAccordionGroup,
+  IonSegment,
+  IonSegmentButton,
+} from "@ionic/vue";
 
 // Interface für die Details
 interface ProductDetail {
@@ -56,7 +79,7 @@ interface ProductDetail {
 }
 
 export default defineComponent({
-  name: 'MyCard',
+  name: "MyCard",
   components: {
     IonCard,
     IonCardContent,
@@ -67,7 +90,9 @@ export default defineComponent({
     IonAccordion,
     IonItem,
     IonLabel,
-    IonAccordionGroup
+    IonAccordionGroup,
+    IonSegment,
+    IonSegmentButton,
   },
   props: {
     firma: String,
@@ -76,10 +101,46 @@ export default defineComponent({
     imageSrc: String,
     price: [String, Number],
     moreInfoAcc: {
-      type: Array as PropType<ProductDetail[]>,
-      default: () => []
-    }
-  }
+      type: Array as PropType<{
+        "100g": ProductDetail[];
+        portion: ProductDetail[];
+      }>,
+      default: () => ({
+        "100g": [
+          { label: "Kcal", value: "300" },
+          { label: "Kohlenhydrate", value: "20g" },
+          { label: "Zucker", value: "2g" },
+          { label: "Eiweiß", value: "80g" },
+          { label: "Fett", value: "0,1g" },
+        ],
+        portion: [
+          { label: "Kcal", value: "150" },
+          { label: "Kohlenhydrate", value: "10g" },
+          { label: "Zucker", value: "1g" },
+          { label: "Eiweiß", value: "40g" },
+          { label: "Fett", value: "0,05g" },
+        ],
+        portionSize: "40g",
+      }),
+    },
+  },
+  setup(props) {
+    const selectedSegment = ref("100g");
+
+    // Computed property to dynamically return nutritional values based on selected segment
+    const displayedNutritionalValues = computed(() => {
+      return props.moreInfoAcc[selectedSegment.value];
+    });
+
+    // Computed property for portion size
+    const portionSize = computed(() => props.moreInfoAcc.portionSize);
+
+    return {
+      selectedSegment,
+      displayedNutritionalValues,
+      portionSize,
+    };
+  },
 });
 </script>
 
@@ -98,6 +159,12 @@ export default defineComponent({
 .product-details-table td:first-child {
   font-weight: bold;
   text-align: left;
+}
+
+.nutritional-header {
+  margin: 5px 0;
+  font-size: 1em;
+  font-weight: bold;
 }
 
 .company-name {
