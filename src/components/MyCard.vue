@@ -11,8 +11,21 @@
         <div class="content-text">
           {{ content }}
         </div>
-        <div class="price" v-if="price">{{ price }} €</div>
+        <div class="price-container">
+          <span class="price">{{ price }} €</span>
+          <ion-icon
+            name="home-outline"
+            id="popover-trigger"
+            class="info-icon"
+          ></ion-icon>
+        </div>
       </div>
+
+      <ion-popover trigger="popover-trigger" dismissOnSelect="true">
+        <div class="popover-content">
+          Der Preis entspricht dem Preis pro Gramm Protein pro Portion.
+        </div>
+      </ion-popover>
 
       <ion-accordion-group>
         <ion-accordion>
@@ -70,6 +83,7 @@ import {
   IonAccordionGroup,
   IonSegment,
   IonSegmentButton,
+  IonIcon
 } from "@ionic/vue";
 
 // Interface für die Details
@@ -136,11 +150,12 @@ export default defineComponent({
 
   // Computed property für die Portionsgröße
   const portionSize = computed(() => props.moreInfoAcc.portionSize);
-
+  const popover = ref(null);
+  
   return {
     selectedSegment,
     displayedNutritionalValues,
-    portionSize,
+    portionSize
   };
 }
 });
@@ -214,6 +229,18 @@ ion-img {
   max-width: 600px;
   margin: auto;
   margin-bottom: 5px;
+}
+
+.info-icon {
+  font-size: 24px; /* Vergrößere die Icon-Größe */
+  color: #666; /* Setze eine sichtbare Farbe */
+  cursor: pointer;
+}
+
+.popover-content {
+  padding: 10px;
+  font-size: 0.9em;
+  color: #333;
 }
 
 @media (min-width: 768px) {
