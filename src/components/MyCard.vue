@@ -35,7 +35,7 @@
               {{
                 selectedSegment === "100g"
                   ? "pro 100g"
-                  : `pro Portion (${portionSize.value})`
+                  : `pro Portion (${portionSize})`
               }}
             </p>
 
@@ -56,7 +56,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, ref, computed, PropType } from "vue";
 import {
   IonCard,
   IonCardContent,
@@ -101,9 +101,10 @@ export default defineComponent({
     imageSrc: String,
     price: [String, Number],
     moreInfoAcc: {
-      type: Array as PropType<{
+      type: Array as unknown as PropType<{
         "100g": ProductDetail[];
         portion: ProductDetail[];
+        portionSize: string;
       }>,
       default: () => ({
         "100g": [
@@ -125,22 +126,23 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const selectedSegment = ref("100g");
+  // Typisiertes ref für den Segment-Wert
+  const selectedSegment = ref<"100g" | "portion">("100g");
 
-    // Computed property to dynamically return nutritional values based on selected segment
-    const displayedNutritionalValues = computed(() => {
-      return props.moreInfoAcc[selectedSegment.value];
-    });
+  // Computed property für die angezeigten Nährwerte
+  const displayedNutritionalValues = computed(() => {
+    return props.moreInfoAcc[selectedSegment.value];
+  });
 
-    // Computed property for portion size
-    const portionSize = computed(() => props.moreInfoAcc.portionSize);
+  // Computed property für die Portionsgröße
+  const portionSize = computed(() => props.moreInfoAcc.portionSize);
 
-    return {
-      selectedSegment,
-      displayedNutritionalValues,
-      portionSize,
-    };
-  },
+  return {
+    selectedSegment,
+    displayedNutritionalValues,
+    portionSize,
+  };
+}
 });
 </script>
 
